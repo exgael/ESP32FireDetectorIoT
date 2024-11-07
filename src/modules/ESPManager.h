@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -13,11 +11,7 @@
 #include <ArduinoJson.h>
 #include <ESPAsyncWebServer.h>
 #include <SPIFFS.h>
-
-// Config
 #include "ESPConfig.h"
-
-// MODULES
 #include "FireDetector/index.h"
 #include "Repoter/index.h"
 #include "SensorManager/index.h"

@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -11,7 +9,7 @@
 
 enum LogLevel { LOG_LEVEL_NONE = 0, LOG_LEVEL_ERROR, LOG_LEVEL_WARN, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG };
 
-// Like in java ~(*.*)~
+// Like in java ~(*.*)~ kinda.
 class Logger {
    public:
     Logger(const char* scope) : scope(scope) {}

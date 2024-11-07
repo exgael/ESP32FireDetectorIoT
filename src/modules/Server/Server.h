@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -28,6 +26,10 @@ class ESPServer {
               TemperatureRegulator& regulator, ActuatorManager& actuatorManager, Reporter& reporter, WiFiModule& wifiModule);
 
     void init() noexcept;
+
+    /**
+     * @brief Runs tasks that handles timing themselves.
+     */
     void periodicRun();
 
    private:

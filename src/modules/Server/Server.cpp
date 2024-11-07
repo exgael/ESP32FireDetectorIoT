@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -31,13 +29,13 @@ void ESPServer::setupRoutes() noexcept {
     router.get("/", server, {},  // No middleware
                [this](Request& req, Response& res) { this->controllers.rootController(req, res); });
 
-    router.get("/value", server, {},  // TODO
+    router.get("/value", server, {},  // VALIDATION TODO
                [this](Request& req, Response& res) { this->controllers.getValuesController(req, res); });
 
-    router.get("/set", server, {},  // TODO
+    router.get("/set", server, {},  // VALIDATION TODO
                [this](Request& req, Response& res) { this->controllers.setValuesController(req, res); });
 
-    router.post("/target", server, {},  // TODO
+    router.post("/target", server, {},  // VALIDATION TODO
                 [this](Request& req, Response& res) { this->controllers.setReportController(req, res); });
 
     server.onNotFound([this](AsyncWebServerRequest* request) {

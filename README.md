@@ -1,7 +1,12 @@
 # ESP32FireDetectorIoT
 
-# JSON Validator and Node-RED Setup
+Il y a une problem de memoire qui arrive de temps en temps en debut d execution. S'il n'arrive pas tot, alors pas de probleme. Je n'ai pas encore fait toutes les `pre-conditions/post-conditions check` pour trouver la cause. 
 
+## Run CURL script 
+```bash
+chmod +x ./run_endpoint
+./run_endpoint.sh
+```
 ## JSON Validator Setup
 
 ### Step 1: Create a Virtual Environment
@@ -42,4 +47,4 @@ cd ~/.node-red
 npm install node-red-dashboard
 npm install node-red-contrib-ui-led
 ```
-ui can be found on `http://localhost:1880/ui`# ESP32FireDetectorIoT
+ui can be found on `http://localhost:1880/ui`

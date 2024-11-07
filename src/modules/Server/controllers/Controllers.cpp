@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -9,6 +7,8 @@
 
 #include "../../ESPConfig.h"
 #include "../../Repoter/index.h"
+#include <map>
+#include <functional>
 
 Controllers::Controllers(const SensorDataProvider& sensorData, FireDetection& fireDetector,
                          TemperatureRegulator& regulator, ActuatorManager& actuatorManager, Reporter& reporter,
@@ -210,6 +210,7 @@ void Controllers::setReportController(Request& req, Response& res) noexcept {
         String target_sp = req.arg("sp");
         int target_sp_int = target_sp.toInt();
 
+        // Set
         reporter.setNewReporting(target_ip, target_port_int, target_sp_int);
 
         logger.info("Target set to IP: %s, Port: %d, Sampling Period: %d", target_ip.c_str(), target_port_int,
@@ -219,184 +220,41 @@ void Controllers::setReportController(Request& req, Response& res) noexcept {
         res.send200();
     } else {
         // Send error response if required parameters are missing
-        res.error("{\"error\": \"Missing required parameters: ip, port, sp\"}");
+        res.error("Missing required parameters: ip, port, sp");
     }
 }
 
 /**
- * @warning Need to SPIFFS it
+ * @warning This controller returns the index.html
  */
 void Controllers::rootController(Request& req, Response& res) noexcept {
-    String htmlFile = R"(<!DOCTYPE HTML>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css">
-  <style>
-    html {
-        font-family: Arial;
-        display: inline-block;
-        margin: 0px auto;
-        text-align: left;
-    }
-    h2 { font-size: 3.0rem; }
-    p { font-size: 3.0rem; }
-    .units { font-size: 1.2rem; }
-    .sensors-labels {
-        font-size: 1.5rem;
-        vertical-align: middle;
-        padding-bottom: 15px;
-    }
-    div {
-        max-width: 500px;
-        word-wrap: break-word;
-    }
-    .grid-container {
-        display: grid;
-        grid-template-columns: auto auto;
-        background-color: #992603;
-        padding: 10px;
-    }
-    .grid-item {
-        background-color: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(0, 0, 0, 0.8);
-        padding: 20px;
-        font-size: 30px;
-        text-align: center;
-    }
-  </style>
-  <title>ESP32 Dashboard</title>
-</head>
 
-<body>
-  <h1>ESP32 Dashboard</h1>
-
-  <h3>System Information:</h3>
-  Uptime      : <span id="uptime">%UPTIME%</span> s<br/>
-  Running     : <span id="running">%RUNNING%</span><br/>
-  Fire Status : <span id="fire">%FIRE%</span><br/>
-
-  <h3>Network Link Status:</h3>
-  WiFi SSID   : %SSID%<br/>
-  MAC Address : %MAC%<br/>
-  IP Address  : %IP%<br/>
-
-  <h3>Actuator Status:</h3>
-  Cooler      : <span id="cooler">%COOLER%</span><br/>
-  Heater      : <span id="heater">%HEATER%</span><br/>
-
-  <h3>Thresholds:</h3>
-  Fire Temp Threshold : <span id="FTT">%FTT%</span> °C<br/>
-  Fire Light Threshold: <span id="FLT">%FLT%</span> <br/>
-  Low Temp Threshold  : <span id="LT">%LT%</span> °C<br/>
-  High Temp Threshold : <span id="HT">%HT%</span> °C<br/>
-
-  <h3>Sensor Data with Icons:</h3>
-  <div class="grid-container">
-    <div class="grid-item">
-      <i class="fas fa-thermometer-half" style="color:#059e8a;"></i>
-    </div>
-    <div class="grid-item">      
-      <span class="sensors-labels">Temperature</span> 
-      <span id="temperature">%TEMPERATURE%</span>
-      <sup class="units">&deg;C</sup>
-    </div>
-    <div class="grid-item">
-      <i class="far fa-lightbulb" style="color:#00add6;"></i>
-    </div>
-    <div class="grid-item">
-      <span class="sensors-labels">Light</span>
-      <span id="light">%LIGHT%</span>
-      <sup class="units">Lumen</sup>
-    </div>
-  </div>
-
-  <h3>Periodic Status Report Configuration:</h3>
-  <form action="/target" method="post">
-    <label for="ip">IP Address:</label>
-    <input type="text" name="ip" placeholder="%PRT_IP%"/><br/>
-    <label for="port">Port:</label>
-    <input type="text" name="port" placeholder="%PRT_PORT%"/><br/>
-    <label for="sp">Sampling Period (in seconds):</label>
-    <input type="text" name="sp" placeholder="%PRT_T%"/><br/>
-    <input type="submit" value="Change Reporting Host"/>
-  </form>
-
-  <script>
-    function startUpdate() {
-        setInterval(function() {
-            fetch('/value?temperature&light&cooler&running&fire&uptime&FTT&FLT&LT&HT')
-                .then(function(response) {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(function(data) {
-                    for (let key in data) {
-                        let element = document.getElementById(key);
-                        if (element) {
-                            element.innerHTML = data[key];
-                        }
-                    }
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        }, 2000);
-    }
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        startUpdate();
-    });
-  </script>
-</body>
-</html>)";
-
-    // Send
-    res.sendHtml(processor(htmlFile));
-}
-
-/**
- * @warning Need to SPIFFS it
- */
-String Controllers::processor(String htmlFile) noexcept {
-    struct Placeholder {
-        const char* key;
-        String value;
+    std::map<String, std::function<String()>> placeholderMap = {
+        {"TEMPERATURE", [&]() { return String(sensorData.getTemperature()); }},
+        {"LIGHT", [&]() { return String(sensorData.getLuminosity()); }},
+        {"UPTIME", [&]() { return String(millis() / 1000); }},  // Uptime in seconds
+        {"RUNNING", [&]() { return regulator.describeState(); }},
+        {"FIRE", [&]() { return fireDetector.isFireDetected() ? "Yes" : "No"; }},
+        {"SSID", [&]() { return wifiModule.getSSID(); }},
+        {"MAC", [&]() { return wifiModule.getMAC(); }},
+        {"IP", [&]() { return wifiModule.getIP(); }},
+        {"COOLER", [&]() { return regulator.isCooling() ? "ON" : "OFF"; }},
+        {"HEATER", [&]() { return regulator.isHeating() ? "ON" : "OFF"; }},
+        {"FTT", [&]() { return String(fireDetector.getTempThreshold()); }},
+        {"FLT", [&]() { return String(fireDetector.getLumThreshold()); }},
+        {"LT", [&]() { return String(regulator.getLowThreshold()); }},
+        {"HT", [&]() { return String(regulator.getHighThreshold()); }},
+        {"PRT_IP", [&]() { return reporter.getTargetIP(); }},
+        {"PRT_PORT", [&]() { return String(reporter.getTargetPort()); }},
+        {"PRT_T", [&]() { return String(reporter.getTargetSP()); }}
     };
 
-    Placeholder placeholders[] = {                                        // System Information
-                                  {"%UPTIME%", String(millis() / 1000)},  // Uptime in seconds
-                                  {"%RUNNING%", regulator.describeState()},
-                                  {"%FIRE%", fireDetector.isFireDetected() ? "Yes" : "No"},
-
-                                  // Network Link Status
-                                  {"%SSID%", wifiModule.getSSID()},
-                                  {"%MAC%", wifiModule.getMAC()},
-                                  {"%IP%", wifiModule.getIP()},
-
-                                  // Sensor Status
-                                  {"%TEMPERATURE%", String(sensorData.getTemperature())},
-                                  {"%LIGHT%", String(sensorData.getLuminosity())},
-                                  {"%COOLER%", regulator.isCooling() ? "ON" : "OFF"},
-                                  {"%HEATER%", regulator.isHeating() ? "ON" : "OFF"},
-
-                                  // Thresholds
-                                  {"%FTT%", String(fireDetector.getTempThreshold())},
-                                  {"%FLT%", String(fireDetector.getLumThreshold())},
-                                  {"%LT%", String(regulator.getLowThreshold())},
-                                  {"%HT%", String(regulator.getHighThreshold())},
-
-                                  // Report status
-                                  {"%PRT_IP%", reporter.getTargetIP()},
-                                  {"%PRT_PORT%", String(reporter.getTargetPort())},
-                                  {"%PRT_T%", String(reporter.getTargetSP())}};
-
-    for (const auto& placeholder : placeholders) {
-        htmlFile.replace(placeholder.key, placeholder.value);
-    }
-
-    return htmlFile;
+    // Send
+    res.sendFile("/index.html",  [&](const String& var) { 
+        auto it = placeholderMap.find(var);
+        while(it != placeholderMap.end()) {
+            return it->second();
+        }
+        return String();
+    });
 }

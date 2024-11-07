@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -19,6 +17,7 @@ class FanController : public IActuator {
     void turnOn() noexcept override;
     void turnOff() noexcept override;
     void setLevel(int level) noexcept;
+    int getCurrentSpeed() const noexcept;
 
    private:
     int controlPin;

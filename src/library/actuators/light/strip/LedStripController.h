@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -55,6 +53,6 @@ class LedStripController : public ILedActuator {
     Adafruit_NeoPixel strip;
     int numLEDs;
     int actuatorPin;
-    size_t current_brightness;
+    size_t currentBrightness;
     Logger logger;
 };

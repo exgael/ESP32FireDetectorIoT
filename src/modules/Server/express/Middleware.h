@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -77,4 +75,4 @@ inline MiddlewareFunction errorHandler(Logger& Logger) {
         }
     };
 }
-}  // namespace Middleware
+}

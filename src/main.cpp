@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -36,13 +34,18 @@ void createManager(ESPServer* server, SensorManager* sensorManager, FireDetectio
 ///////////////////////////////
 
 void setup() {
+
+    // Initialize SPIFFS
+    SPIFFS.begin(true);
+
     createClock();
     createLogger();
+    
     ESPConfig& config = getConfig();
 
+    // Initialize ESP Modules
     WiFiModule* wifiModule = createWiFiModule(config);
     wifiModule->init();
-
     ActuatorManager* actuatorManager = createControlModule(config);
     SensorManager* sensorManager = createSensorModule(config);
     FireDetection* fireDetector = createFireDetectionModule(sensorManager, config);

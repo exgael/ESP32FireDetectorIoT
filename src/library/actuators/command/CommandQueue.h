@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -10,13 +8,25 @@
 #include <queue>
 
 #include "ICommand.h"
+#include "../../logger/index.h"
 
 class CommandQueue {
    public:
-    // Methods to add and process commands
+
+    CommandQueue();
+
+    /**
+     * @brief Add a command to the queue 
+     */
     void addCommand(ICommand* command) noexcept;
+
+    /**
+     * @brief Process all commands in the queue
+     */
     void processCommands() noexcept;
 
    private:
     std::queue<ICommand*> commandQueue;
+
+    Logger logger;
 };

@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -13,7 +11,7 @@
 
 class FireDetection {
    public:
-    FireDetection(const SensorDataProvider& data, float temperature_threshold, int luminosity_threshold,
+    FireDetection(const SensorDataProvider& data, float temperatureThreshold, int luminosityThreshold,
                   int buffer_size = 10);
 
     /**
@@ -36,14 +34,14 @@ class FireDetection {
     void updateLuminosityThreshold(int new_threshold) noexcept;
 
     /**
-     * @brief Getter for fire detected
+     * @brief Getter for fire detected.
      * @warning Does not do anything but returning a boolean.
      * @return bool: `true` if fire detected, `false` otherwise.
      */
     const bool isFireDetected() const noexcept;
 
-    int getLumThreshold() { return luminosity_threshold; }
-    int getTempThreshold() { return temperature_threshold; }
+    int getLumThreshold() { return luminosityThreshold; }
+    int getTempThreshold() { return temperatureThreshold; }
 
    private:
     /**
@@ -60,12 +58,22 @@ class FireDetection {
     mutable int fireDetectionLevel;  // Might be usefull if i want to show more details
 
     const SensorDataProvider& data;
-    float temperature_threshold;
-    int luminosity_threshold;
+    float temperatureThreshold;
+    int luminosityThreshold;
 
+    /**
+     * @brief Handles logic for determinating whether a problems is ocurring.
+     * @return true if the number of reading exceeding threshold is above some %, else false.
+     */
     bool checkAlertCondition(int exceedCount, int buffer_size, float thresholdPercentage = 70.0) const noexcept;
-    int countExceedances(const std::deque<int>& buffer, const float threshold) const noexcept;
-    int countExceedances(const std::deque<float>& buffer, const int threshold) const noexcept;
+    
+    template <typename T>
+    int countExceedances(const std::deque<T>& buffer, T threshold) const noexcept;
 
     Logger logger;
 };
+
+template <typename T>
+int FireDetection::countExceedances(const std::deque<T>& buffer, T threshold) const noexcept {
+    return std::count_if(buffer.begin(), buffer.end(), [threshold](T value) { return value >= threshold; });
+}

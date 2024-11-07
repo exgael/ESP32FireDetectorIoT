@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -16,6 +14,10 @@ class LightSensor : public ISensor {
    public:
     explicit LightSensor(int pin);
     void initialize() override;
+
+    /**
+     * @brief read the luminosity output from the light sensor.
+     */
     float readData() override;
 
    private:

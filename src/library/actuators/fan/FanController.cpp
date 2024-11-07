@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -36,3 +34,7 @@ void FanController::setLevel(int level) noexcept {
     ledcWrite(pwmChannel, currentSpeed);
     logger.debug("FAN speed %d -> %d.", currentSpeed, level);
 }
+
+ int FanController::getCurrentSpeed() const noexcept {
+    return currentSpeed;
+ }

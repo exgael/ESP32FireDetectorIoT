@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -12,19 +10,29 @@
 // Singleton
 class Clock {
    public:
-    // Get the singleton instance
+    /**
+     * @brief Get the singleton instance.
+     */
     static Clock& sharedInstance();
 
-    // Update the clock
+    /**
+     * @brief Update the clock.
+     */
     void update();
 
     unsigned long getDeltaTime() const;
     unsigned long getElapsedTime() const;
 
-    // Check if a certain amount of time has passed
+    /**
+     * @brief Check if a certain amount of time has passed.
+     * 
+     * Also reset the timer as a side effect if enough time as passed.
+     */
     bool hasTimePassed(unsigned long& timer, unsigned long interval);
 
-    // Reset clock start time
+    /**
+     * @brief Reset clock start time.
+     */
     void reset();
 
    private:

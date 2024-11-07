@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -17,13 +15,15 @@ class TemperatureSensor : public ISensor {
    public:
     explicit TemperatureSensor(int pin);
     void initialize() override;
+
+    /**
+     * @brief read the temperature output from the temperature sensor.
+     */
     float readData() override;
 
    private:
     OneWire oneWire;
     DallasTemperature sensors;
-
-    // For logging purposes.
     int sensorPin;
     Logger logger;
 };

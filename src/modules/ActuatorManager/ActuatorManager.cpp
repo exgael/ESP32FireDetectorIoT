@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -35,10 +33,9 @@ void ActuatorManager::requestFanOff() noexcept {
 }
 
 void ActuatorManager::requestFanSpeed(float level) noexcept {
-    if (fanSpeed != level) {
+    if (fanController.getCurrentSpeed() != static_cast<int>(level)) {
         logger.debug("CMD FAN SPEED %.2f accepted.", level);
         addCommand(new SetFanLevelCommand(&fanController, level));
-        fanSpeed = level;
     }
 }
 
@@ -140,7 +137,6 @@ void ActuatorManager::requestLedStripOn() noexcept {
     }
 }
 
-// Add command to the queue
 void ActuatorManager::addCommand(ICommand* command) noexcept { commandQueue.addCommand(command); }
 
 // Process all commands in the queue
@@ -158,4 +154,4 @@ void ActuatorManager::init() noexcept {
     logger.info("Actuators Ready.");
 }
 
-float ActuatorManager::getFanSpeed() const noexcept { return fanSpeed; }
+float ActuatorManager::getFanSpeed() const noexcept { return fanController.getCurrentSpeed(); }

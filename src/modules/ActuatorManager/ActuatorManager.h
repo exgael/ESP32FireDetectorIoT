@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -9,6 +7,9 @@
 
 #include "../../library/index.h"
 
+/**
+ * @brief This class provide a central API to excute actuating commands. 
+ */
 class ActuatorManager {
    public:
     ActuatorManager(FanController fanController, LedController coolerController, LedController heaterController,
@@ -60,7 +61,6 @@ class ActuatorManager {
 
     // Actuator Flags
     bool isFanOn = false;
-    float fanSpeed = 0.0;
 
     bool isCoolerOn = false;
     bool isHeaterOn = false;
@@ -71,7 +71,7 @@ class ActuatorManager {
     String ledStripcolor = "";
 
     /**
-     * Helper method to add a command.
+     * @brief Helper method to add a command.
      */
     void addCommand(ICommand* command) noexcept;
 };

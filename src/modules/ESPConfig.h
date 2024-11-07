@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -13,7 +11,9 @@
 ///////////////////////////
 class ESPConfig {
    public:
-    // Singleton instance
+    /**
+     * @brief Get the configuration instance.
+     */
     static ESPConfig& sharedInstance() {
         static ESPConfig instance;
         return instance;
@@ -91,7 +91,6 @@ class ESPConfig {
     int HIGH_TEMP = 24;
 
    private:
-    // Private constructor and assignment to enforce singleton pattern
     ESPConfig() = default;
     ESPConfig(const ESPConfig&) = delete;
     ESPConfig& operator=(const ESPConfig&) = delete;

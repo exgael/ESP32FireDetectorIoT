@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -15,10 +13,14 @@ class SensorManager {
    public:
     SensorManager(TemperatureSensor tempSensor, LightSensor lightSensor, int buffer_size);
 
-    // read-only access
+    /**
+     * @brief Get the class handling data in-memory storage.
+     */
     const SensorDataProvider& getSensorDataProvider() const;
 
-    // Update
+    /**
+     * @brief Read sensors and store readings in in-memory storage.
+     */
     void updateReadings();
 
     void init();

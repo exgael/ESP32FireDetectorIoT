@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -20,15 +18,17 @@ class SensorDataProvider {
     void setLuminosity(int lum);
     void setTemperature(float temp);
 
-    // Read-only access to current readings
+    // Get data
     const int& getLuminosity() const;
     const float& getTemperature() const;
 
-    // Read-only access to historical data
+    // Get historical data
     const std::deque<int>& getHistoricalLuminosity() const;
     const std::deque<float>& getHistoricalTemperature() const;
 
    private:
+
+    // last reading
     int luminosity = 0;
     float temperature = 0.0;
 

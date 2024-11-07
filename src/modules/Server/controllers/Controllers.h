@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -21,7 +19,9 @@
 
 class Reporter;
 
-// big ass technical debt
+/**
+ * @brief This class containes all the server controllers.
+ */
 class Controllers {
    public:
     Controllers(const SensorDataProvider& sensorData, FireDetection& fireDetector, TemperatureRegulator& regulator,
@@ -44,7 +44,6 @@ class Controllers {
 
     Logger logger;
 
-    String processor(String htmlFile) noexcept;
     void sendParamBadRequest(JsonDocument& json, const String& paramName, Response& res) const noexcept;
     void sendParamValueBadRequest(JsonDocument& json, const String& paramName, const String& paramValue,
                                   Response& res) const noexcept;

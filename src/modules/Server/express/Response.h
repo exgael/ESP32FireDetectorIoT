@@ -1,13 +1,12 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
 #pragma once
 
 #include <ESPAsyncWebServer.h>
+#include "SPIFFS.h"
 
 /**
  * @brief this class handle the response of the request
@@ -19,6 +18,10 @@ class Response {
     void status(int code) { statusCode = code; }
 
     void send200() { rawRequest->send(statusCode); }
+
+    void sendFile(String filePath, std::function<String (const String& var)> processor) {
+        rawRequest->send(SPIFFS, filePath, String(), false, processor);
+    }
 
     void sendText(const String& text) { rawRequest->send(statusCode, "text/plain", text); }
 
@@ -33,7 +36,7 @@ class Response {
     /**
      * @brief access the `AsyncWebServerRequest` object
      * @return return the underlying request object
-     * @warning Futur me, if you use this, add a method instead. Tech debt.
+     * @warning Futur me, if you use this, add a method instead.
      */
     AsyncWebServerRequest* raw() { return rawRequest; }
 

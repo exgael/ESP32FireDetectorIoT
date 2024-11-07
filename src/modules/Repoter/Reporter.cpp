@@ -1,7 +1,5 @@
 /*
  * Author: Benoît Barbier
- * Created: 2024-11-07
- * Last Modified: 2024-11-07
  */
 
 
@@ -48,7 +46,7 @@ void Reporter::send(HTTPClient& http, String& jsonString) {
 }
 
 /**
- * @brief Whether Repotering is occuring
+ * @brief Whether report is occuring
  */
 bool Reporter::isReporting() { return target_sp > 0 && !target_ip.isEmpty(); }
 
