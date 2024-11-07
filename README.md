@@ -1,4 +1,4 @@
-# Esp32-Dev---IoT---Course---M1---UniCA
+# ESP32FireDetectorIoT
 
 # JSON Validator and Node-RED Setup
 
