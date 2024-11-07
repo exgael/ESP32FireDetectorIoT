@@ -1,0 +1,1625 @@
+[
+    {
+        "id": "480d3330160f3143",
+        "type": "tab",
+        "label": "ESP32 Dashboard",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "2707d8684532ab0b",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "name": "Status",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "943d4c634887420c",
+            "edea8e0a61ff2a3d",
+            "675a2df4a7f79a9f",
+            "39b4e242e3d7bf22",
+            "017341149f487b4c",
+            "a3ec8a5bef89101c",
+            "824640039cf3fd7f",
+            "ac657fd9c41c12b9"
+        ],
+        "x": 954,
+        "y": 99,
+        "w": 352,
+        "h": 282
+    },
+    {
+        "id": "baa67b34bee0cf4f",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "g": "1f1bd42525ce3be1",
+        "name": "gps",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "0a2d273639be961b",
+            "a1dee38add206f3a"
+        ],
+        "x": 974,
+        "y": 619,
+        "w": 172,
+        "h": 122
+    },
+    {
+        "id": "1f1bd42525ce3be1",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "name": "Location",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "abd22b8b6a541e9a",
+            "678a424e6eccba09",
+            "baa67b34bee0cf4f"
+        ],
+        "x": 948,
+        "y": 539,
+        "w": 224,
+        "h": 282
+    },
+    {
+        "id": "add8dd4b4a4cef25",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "name": "Response",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "0ca2483b23f11174"
+        ],
+        "x": 194,
+        "y": 379,
+        "w": 152,
+        "h": 82
+    },
+    {
+        "id": "ed15ada31c594411",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "name": "Temperature Regulation",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "2644d3ce7aff9ca0",
+            "31eb283729c3527a"
+        ],
+        "x": 954,
+        "y": 399,
+        "w": 212,
+        "h": 122
+    },
+    {
+        "id": "fd78b60c801d64d6",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "name": "Info",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "5502da859581e8f8",
+            "2eb0dd878fa0790f",
+            "44980c2d8defaae5"
+        ],
+        "x": 954,
+        "y": 839,
+        "w": 172,
+        "h": 162
+    },
+    {
+        "id": "b1e37a4f7a2bfada",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "name": "Network",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e32150ba698c7128",
+            "7d80c4d89215cbed",
+            "dfb8f2d05d9d1c55",
+            "5d5d4b9da6d6f293"
+        ],
+        "x": 954,
+        "y": 1019,
+        "w": 212,
+        "h": 202
+    },
+    {
+        "id": "23014f6a745e13aa",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "name": "Report Host",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e1aab708c4b5b6aa",
+            "698eecbdd438afac",
+            "41c3528527588eda"
+        ],
+        "x": 954,
+        "y": 1239,
+        "w": 192,
+        "h": 162
+    },
+    {
+        "id": "c9854c38add133dd",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "name": "Set Regulation Threshold",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "caf0b3b55964538c",
+            "ff0623dc05e18401",
+            "60b64fa5e6bc9e6e",
+            "ab467015c45bd720",
+            "dd62ebf41045234b",
+            "c0b1b1ce98b2f759",
+            "c3249c9060392f63",
+            "33763e43f52e76f1",
+            "fde5daa561a83987"
+        ],
+        "x": 1234,
+        "y": 399,
+        "w": 492,
+        "h": 262
+    },
+    {
+        "id": "001c32d5e1be2c3b",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "g": "0660d206fc98734b",
+        "name": "Set Fire detection threshold",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "48162f40fc556af3",
+            "df06c4961d4b7976",
+            "cd3d54b3a181f652",
+            "a333be955c86b9de",
+            "d7f6674c72ee0ed2",
+            "4d4e9a0d4e1c691e",
+            "074187b6d688344a",
+            "3389215326b6a54a",
+            "52d6acea377b7033"
+        ],
+        "x": 54,
+        "y": 1079,
+        "w": 492,
+        "h": 262
+    },
+    {
+        "id": "5e93b04cabf8bc8a",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "g": "0660d206fc98734b",
+        "name": "Fetch fire detection data",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "34fa7d8c91d7296d",
+            "2b6d8703a8eeca59",
+            "85b5d4b63d1ddcb3",
+            "1ce1ba0963354360",
+            "f365d6fd760d2ca9",
+            "4ef16a670f6bf5df"
+        ],
+        "x": 54,
+        "y": 859,
+        "w": 372,
+        "h": 202
+    },
+    {
+        "id": "0660d206fc98734b",
+        "type": "group",
+        "z": "480d3330160f3143",
+        "name": "FIRE DETECTION",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "001c32d5e1be2c3b",
+            "5e93b04cabf8bc8a"
+        ],
+        "x": 28,
+        "y": 833,
+        "w": 544,
+        "h": 534
+    },
+    {
+        "id": "32794d1802f48bc5",
+        "type": "http in",
+        "z": "480d3330160f3143",
+        "name": "ESP32 Report",
+        "url": "/esp",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 580,
+        "wires": [
+            [
+                "fdb1d388eae422b4"
+            ]
+        ]
+    },
+    {
+        "id": "fdb1d388eae422b4",
+        "type": "json",
+        "z": "480d3330160f3143",
+        "name": "Parse JSON",
+        "property": "req.body",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 580,
+        "wires": [
+            [
+                "0ca2483b23f11174",
+                "77fa480d1847c07a",
+                "943d4c634887420c",
+                "edea8e0a61ff2a3d",
+                "675a2df4a7f79a9f",
+                "824640039cf3fd7f",
+                "a3ec8a5bef89101c",
+                "ac657fd9c41c12b9",
+                "abd22b8b6a541e9a",
+                "0a2d273639be961b",
+                "a1dee38add206f3a",
+                "678a424e6eccba09",
+                "2644d3ce7aff9ca0",
+                "31eb283729c3527a",
+                "5502da859581e8f8",
+                "2eb0dd878fa0790f",
+                "44980c2d8defaae5",
+                "e32150ba698c7128",
+                "7d80c4d89215cbed",
+                "5d5d4b9da6d6f293",
+                "dfb8f2d05d9d1c55",
+                "41c3528527588eda",
+                "698eecbdd438afac",
+                "e1aab708c4b5b6aa",
+                "6b2a35df883d4c91",
+                "2b6d8703a8eeca59"
+            ]
+        ]
+    },
+    {
+        "id": "0ca2483b23f11174",
+        "type": "http response",
+        "z": "480d3330160f3143",
+        "g": "add8dd4b4a4cef25",
+        "name": "Ok",
+        "statusCode": "200",
+        "headers": {},
+        "x": 270,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "943d4c634887420c",
+        "type": "ui_gauge",
+        "z": "480d3330160f3143",
+        "g": "2707d8684532ab0b",
+        "name": "Temperature Gauge",
+        "group": "7cc2816f5090be93",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature (°C)",
+        "label": "°C",
+        "format": "{{payload.status.temperature}}",
+        "min": 0,
+        "max": 50,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "20",
+        "seg2": "24",
+        "diff": false,
+        "className": "",
+        "x": 1070,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "edea8e0a61ff2a3d",
+        "type": "ui_gauge",
+        "z": "480d3330160f3143",
+        "g": "2707d8684532ab0b",
+        "name": "Light Gauge",
+        "group": "7cc2816f5090be93",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Light (Lumen)",
+        "label": "Lumen",
+        "format": "{{payload.status.light}}",
+        "min": 0,
+        "max": "3000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": 1000,
+        "seg2": 2000,
+        "diff": false,
+        "className": "",
+        "x": 1050,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "675a2df4a7f79a9f",
+        "type": "ui_gauge",
+        "z": "480d3330160f3143",
+        "g": "2707d8684532ab0b",
+        "name": "Fan Speed Gauge",
+        "group": "7cc2816f5090be93",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Fan Speed",
+        "label": "Speed",
+        "format": "{{payload.status.fanspeed}}",
+        "min": 0,
+        "max": 255,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "128",
+        "seg2": "220",
+        "diff": false,
+        "className": "",
+        "x": 1070,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "39b4e242e3d7bf22",
+        "type": "ui_led",
+        "z": "480d3330160f3143",
+        "g": "2707d8684532ab0b",
+        "order": 4,
+        "group": "c90e0f6556da1798",
+        "width": "",
+        "height": "",
+        "label": "Heater Status",
+        "colorForValue": [
+            {
+                "color": "#008000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#ff0000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Heater LED",
+        "x": 1210,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "017341149f487b4c",
+        "type": "ui_led",
+        "z": "480d3330160f3143",
+        "g": "2707d8684532ab0b",
+        "order": 5,
+        "group": "c90e0f6556da1798",
+        "width": "",
+        "height": "",
+        "label": "Cooler Status",
+        "labelPlacement": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "OFF",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "ON",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Cooler LED",
+        "x": 1210,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "a3ec8a5bef89101c",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "2707d8684532ab0b",
+        "group": "c90e0f6556da1798",
+        "order": 7,
+        "width": "",
+        "height": "",
+        "name": "Fire Detection",
+        "label": "Fire Detection Status",
+        "format": "{{payload.status.fire}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1060,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e32150ba698c7128",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "b1e37a4f7a2bfada",
+        "group": "2d78869cd0a56abb",
+        "order": 1,
+        "width": "",
+        "height": "",
+        "name": "Uptime",
+        "label": "Uptime (s)",
+        "format": "{{msg.payload.net.uptime}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1040,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "7d80c4d89215cbed",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "b1e37a4f7a2bfada",
+        "group": "2d78869cd0a56abb",
+        "order": 1,
+        "width": "",
+        "height": "",
+        "name": "SSID",
+        "label": "WiFi SSID",
+        "format": "{{msg.payload.net.ssid}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1030,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "dfb8f2d05d9d1c55",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "b1e37a4f7a2bfada",
+        "group": "2d78869cd0a56abb",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "IP Address",
+        "label": "IP Address",
+        "format": "{{msg.payload.net.ip}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1050,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "5d5d4b9da6d6f293",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "b1e37a4f7a2bfada",
+        "group": "2d78869cd0a56abb",
+        "order": 3,
+        "width": "",
+        "height": "",
+        "name": "MAC Address",
+        "label": "MAC Address",
+        "format": "{{msg.payload.net.mac}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1060,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "abd22b8b6a541e9a",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "1f1bd42525ce3be1",
+        "group": "b345ec56edc133d1",
+        "order": 1,
+        "width": "",
+        "height": "",
+        "name": "Room",
+        "label": "Room",
+        "format": "{{msg.payload.location.room}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1030,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "678a424e6eccba09",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "1f1bd42525ce3be1",
+        "group": "b345ec56edc133d1",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "Address",
+        "label": "Address",
+        "format": "{{msg.payload.location.address}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1040,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "77fa480d1847c07a",
+        "type": "debug",
+        "z": "480d3330160f3143",
+        "name": "Json Payload",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 260,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "824640039cf3fd7f",
+        "type": "change",
+        "z": "480d3330160f3143",
+        "g": "2707d8684532ab0b",
+        "name": "Heater",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.status.heat",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 260,
+        "wires": [
+            [
+                "39b4e242e3d7bf22"
+            ]
+        ]
+    },
+    {
+        "id": "ac657fd9c41c12b9",
+        "type": "change",
+        "z": "480d3330160f3143",
+        "g": "2707d8684532ab0b",
+        "name": "Cooler",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.status.cold",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 300,
+        "wires": [
+            [
+                "017341149f487b4c"
+            ]
+        ]
+    },
+    {
+        "id": "0a2d273639be961b",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "baa67b34bee0cf4f",
+        "group": "b345ec56edc133d1",
+        "order": 1,
+        "width": "",
+        "height": "",
+        "name": "Latitude",
+        "label": "Latitude",
+        "format": "{{msg.payload.location.gps.lat}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1060,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "a1dee38add206f3a",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "baa67b34bee0cf4f",
+        "group": "b345ec56edc133d1",
+        "order": 1,
+        "width": "",
+        "height": "",
+        "name": "Longitude",
+        "label": "Longitude",
+        "format": "{{msg.payload.location.gps.lon}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1060,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "2644d3ce7aff9ca0",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "ed15ada31c594411",
+        "group": "13a49e9534f67475",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "low threshold",
+        "label": "Regulation low threshold",
+        "format": "{{msg.payload.regul.lt}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1060,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "31eb283729c3527a",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "ed15ada31c594411",
+        "group": "13a49e9534f67475",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "high threshold",
+        "label": "Regulation high threshold",
+        "format": "{{msg.payload.regul.ht}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1060,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "5502da859581e8f8",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "fd78b60c801d64d6",
+        "group": "2d78869cd0a56abb",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "Ident",
+        "label": "Ident",
+        "format": "{{msg.payload.info.ident}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1030,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "2eb0dd878fa0790f",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "fd78b60c801d64d6",
+        "group": "2d78869cd0a56abb",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "User",
+        "label": "User",
+        "format": "{{msg.payload.info.user}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1030,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "44980c2d8defaae5",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "fd78b60c801d64d6",
+        "group": "2d78869cd0a56abb",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "location",
+        "label": "location",
+        "format": "{{msg.payload.info.loc}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1040,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "e1aab708c4b5b6aa",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "23014f6a745e13aa",
+        "group": "a2a0fe9da3d937cd",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Target IP",
+        "label": "Target IP",
+        "format": "{{msg.payload.reporthost.target_ip}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1040,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "698eecbdd438afac",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "23014f6a745e13aa",
+        "group": "a2a0fe9da3d937cd",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Target port",
+        "label": "Target port",
+        "format": "{{msg.payload.reporthost.target_port}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1050,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "41c3528527588eda",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "23014f6a745e13aa",
+        "group": "a2a0fe9da3d937cd",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "SP",
+        "label": "SP",
+        "format": "{{msg.payload.reporthost.sp}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1030,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "caf0b3b55964538c",
+        "type": "http request",
+        "z": "480d3330160f3143",
+        "g": "c9854c38add133dd",
+        "name": "set",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1650,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ff0623dc05e18401",
+        "type": "ui_slider",
+        "z": "480d3330160f3143",
+        "g": "c9854c38add133dd",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "13a49e9534f67475",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "",
+        "topicType": "flow",
+        "min": "15",
+        "max": "30",
+        "step": 1,
+        "className": "",
+        "x": 1310,
+        "y": 560,
+        "wires": [
+            [
+                "60b64fa5e6bc9e6e"
+            ]
+        ]
+    },
+    {
+        "id": "6b2a35df883d4c91",
+        "type": "change",
+        "z": "480d3330160f3143",
+        "name": "Set ESP_IP",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ESP_IP",
+                "pt": "flow",
+                "to": "payload.net.ip",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "60b64fa5e6bc9e6e",
+        "type": "change",
+        "z": "480d3330160f3143",
+        "g": "c9854c38add133dd",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "LT_SLIDER_VALUE",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1500,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ab467015c45bd720",
+        "type": "ui_button",
+        "z": "480d3330160f3143",
+        "g": "c9854c38add133dd",
+        "name": "LT",
+        "group": "13a49e9534f67475",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Set LT",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "topicType": "msg",
+        "x": 1310,
+        "y": 440,
+        "wires": [
+            [
+                "dd62ebf41045234b"
+            ]
+        ]
+    },
+    {
+        "id": "dd62ebf41045234b",
+        "type": "function",
+        "z": "480d3330160f3143",
+        "g": "c9854c38add133dd",
+        "name": "build set LT url",
+        "func": "let esp_ip = flow.get(\"ESP_IP\");\nlet lt_value = flow.get(\"LT_SLIDER_VALUE\");\n\nif (esp_ip && lt_value !== undefined) {\n    msg.url = `${esp_ip}:80/set?lt=${lt_value}`;\n    return msg;\n} else {\n    node.error(\"ESP_IP or LT_SLIDER_VALUE is not set in the flow context\");\n    return null;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1460,
+        "y": 440,
+        "wires": [
+            [
+                "caf0b3b55964538c"
+            ]
+        ]
+    },
+    {
+        "id": "c0b1b1ce98b2f759",
+        "type": "ui_slider",
+        "z": "480d3330160f3143",
+        "g": "c9854c38add133dd",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "13a49e9534f67475",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "",
+        "topicType": "flow",
+        "min": "15",
+        "max": "30",
+        "step": 1,
+        "className": "",
+        "x": 1310,
+        "y": 620,
+        "wires": [
+            [
+                "c3249c9060392f63"
+            ]
+        ]
+    },
+    {
+        "id": "c3249c9060392f63",
+        "type": "change",
+        "z": "480d3330160f3143",
+        "g": "c9854c38add133dd",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HT_SLIDER_VALUE",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1500,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "33763e43f52e76f1",
+        "type": "ui_button",
+        "z": "480d3330160f3143",
+        "g": "c9854c38add133dd",
+        "name": "HT",
+        "group": "13a49e9534f67475",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Set HT",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "topicType": "msg",
+        "x": 1310,
+        "y": 500,
+        "wires": [
+            [
+                "fde5daa561a83987"
+            ]
+        ]
+    },
+    {
+        "id": "fde5daa561a83987",
+        "type": "function",
+        "z": "480d3330160f3143",
+        "g": "c9854c38add133dd",
+        "name": "build set HT url",
+        "func": "let esp_ip = flow.get(\"ESP_IP\");\nlet ht_value = flow.get(\"HT_SLIDER_VALUE\");\n\nif (esp_ip && ht_value !== undefined) {\n    msg.url = `${esp_ip}:80/set?ht=${ht_value}`;\n    return msg;\n} else {\n    node.error(\"ESP_IP or HT_SLIDER_VALUE is not set in the flow context\");\n    return null;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1460,
+        "y": 500,
+        "wires": [
+            [
+                "caf0b3b55964538c"
+            ]
+        ]
+    },
+    {
+        "id": "48162f40fc556af3",
+        "type": "http request",
+        "z": "480d3330160f3143",
+        "g": "001c32d5e1be2c3b",
+        "name": "set",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 470,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "df06c4961d4b7976",
+        "type": "ui_slider",
+        "z": "480d3330160f3143",
+        "g": "001c32d5e1be2c3b",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "caacb41aa405d710",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "",
+        "topicType": "flow",
+        "min": "15",
+        "max": "30",
+        "step": 1,
+        "className": "",
+        "x": 130,
+        "y": 1240,
+        "wires": [
+            [
+                "cd3d54b3a181f652"
+            ]
+        ]
+    },
+    {
+        "id": "cd3d54b3a181f652",
+        "type": "change",
+        "z": "480d3330160f3143",
+        "g": "001c32d5e1be2c3b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "FTT_SLIDER_VALUE",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 1240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a333be955c86b9de",
+        "type": "ui_button",
+        "z": "480d3330160f3143",
+        "g": "001c32d5e1be2c3b",
+        "name": "FTT",
+        "group": "caacb41aa405d710",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Set fire temperature threshold",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "topicType": "msg",
+        "x": 130,
+        "y": 1120,
+        "wires": [
+            [
+                "d7f6674c72ee0ed2"
+            ]
+        ]
+    },
+    {
+        "id": "d7f6674c72ee0ed2",
+        "type": "function",
+        "z": "480d3330160f3143",
+        "g": "001c32d5e1be2c3b",
+        "name": "build set FTT url",
+        "func": "let esp_ip = flow.get(\"ESP_IP\");\nlet ftt_value = flow.get(\"FTT_SLIDER_VALUE\");\n\nif (esp_ip && ftt_value !== undefined) {\n    msg.url = `${esp_ip}:80/set?FTT=${ftt_value}`;\n    return msg;\n} else {\n    node.error(\"ESP_IP or FTT_SLIDER_VALUE is not set in the flow context\");\n    return null;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 1120,
+        "wires": [
+            [
+                "48162f40fc556af3"
+            ]
+        ]
+    },
+    {
+        "id": "4d4e9a0d4e1c691e",
+        "type": "ui_slider",
+        "z": "480d3330160f3143",
+        "g": "001c32d5e1be2c3b",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "caacb41aa405d710",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "",
+        "topicType": "flow",
+        "min": "0",
+        "max": "5000",
+        "step": 1,
+        "className": "",
+        "x": 130,
+        "y": 1300,
+        "wires": [
+            [
+                "074187b6d688344a"
+            ]
+        ]
+    },
+    {
+        "id": "074187b6d688344a",
+        "type": "change",
+        "z": "480d3330160f3143",
+        "g": "001c32d5e1be2c3b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "FLT_SLIDER_VALUE",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3389215326b6a54a",
+        "type": "ui_button",
+        "z": "480d3330160f3143",
+        "g": "001c32d5e1be2c3b",
+        "name": "FLT",
+        "group": "caacb41aa405d710",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Set fire light threshold",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "topicType": "msg",
+        "x": 130,
+        "y": 1180,
+        "wires": [
+            [
+                "52d6acea377b7033"
+            ]
+        ]
+    },
+    {
+        "id": "52d6acea377b7033",
+        "type": "function",
+        "z": "480d3330160f3143",
+        "g": "001c32d5e1be2c3b",
+        "name": "build set FLT url",
+        "func": "let esp_ip = flow.get(\"ESP_IP\");\nlet flt_value = flow.get(\"FLT_SLIDER_VALUE\");\n\nif (esp_ip && flt_value !== undefined) {\n    msg.url = `${esp_ip}:80/set?FLT=${flt_value}`;\n    return msg;\n} else {\n    node.error(\"ESP_IP or FLT_SLIDER_VALUE is not set in the flow context\");\n    return null;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 1180,
+        "wires": [
+            [
+                "48162f40fc556af3"
+            ]
+        ]
+    },
+    {
+        "id": "34fa7d8c91d7296d",
+        "type": "http request",
+        "z": "480d3330160f3143",
+        "g": "5e93b04cabf8bc8a",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 150,
+        "y": 940,
+        "wires": [
+            [
+                "85b5d4b63d1ddcb3"
+            ]
+        ]
+    },
+    {
+        "id": "2b6d8703a8eeca59",
+        "type": "function",
+        "z": "480d3330160f3143",
+        "g": "5e93b04cabf8bc8a",
+        "name": "build get FTT&FLT url",
+        "func": "let esp_ip = flow.get(\"ESP_IP\");\n\nif (esp_ip !== undefined) {\n    msg.url = `${esp_ip}:80/value?FTT&FLT`;\n    return msg;\n} else {\n    node.error(\"ESP_IP is not set in the flow context\");\n    return null;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 900,
+        "wires": [
+            [
+                "34fa7d8c91d7296d"
+            ]
+        ]
+    },
+    {
+        "id": "85b5d4b63d1ddcb3",
+        "type": "json",
+        "z": "480d3330160f3143",
+        "g": "5e93b04cabf8bc8a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 130,
+        "y": 980,
+        "wires": [
+            [
+                "1ce1ba0963354360",
+                "4ef16a670f6bf5df",
+                "f365d6fd760d2ca9"
+            ]
+        ]
+    },
+    {
+        "id": "1ce1ba0963354360",
+        "type": "debug",
+        "z": "480d3330160f3143",
+        "g": "5e93b04cabf8bc8a",
+        "name": "Check Response",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 170,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "f365d6fd760d2ca9",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "5e93b04cabf8bc8a",
+        "group": "caacb41aa405d710",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "FLT ",
+        "label": "Fire luminosity threshold",
+        "format": "{{msg.payload.FLT}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 350,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "4ef16a670f6bf5df",
+        "type": "ui_text",
+        "z": "480d3330160f3143",
+        "g": "5e93b04cabf8bc8a",
+        "group": "caacb41aa405d710",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "FTT ",
+        "label": "Fire temperature threshold",
+        "format": "{{msg.payload.FTT}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 350,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "805ea0e3e5c321e0",
+        "type": "comment",
+        "z": "480d3330160f3143",
+        "name": "",
+        "info": "There is a link to match report update speed",
+        "x": 200,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "7cc2816f5090be93",
+        "type": "ui_group",
+        "name": "Sensors",
+        "tab": "1f3fb8fde7bb74bb",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c90e0f6556da1798",
+        "type": "ui_group",
+        "name": "Status",
+        "tab": "1f3fb8fde7bb74bb",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2d78869cd0a56abb",
+        "type": "ui_group",
+        "name": "Info",
+        "tab": "a2c5b125997d367f",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b345ec56edc133d1",
+        "type": "ui_group",
+        "name": "Location",
+        "tab": "a2c5b125997d367f",
+        "order": 6,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "13a49e9534f67475",
+        "type": "ui_group",
+        "name": "Regulation",
+        "tab": "1f3fb8fde7bb74bb",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a2a0fe9da3d937cd",
+        "type": "ui_group",
+        "name": "ReportHost",
+        "tab": "a2c5b125997d367f",
+        "order": 7,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "caacb41aa405d710",
+        "type": "ui_group",
+        "name": "Fire Detection",
+        "tab": "1f3fb8fde7bb74bb",
+        "order": 7,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1f3fb8fde7bb74bb",
+        "type": "ui_tab",
+        "name": "ESP Regulation",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a2c5b125997d367f",
+        "type": "ui_tab",
+        "name": "ESP32 Info",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

@@ -1,0 +1,16 @@
+BasedOnStyle: Google
+IndentWidth: 4
+ColumnLimit: 120
+# AllowShortIfStatementsOnASingleLine: false
+# AlignConsecutiveAssignments: true
+# AlignConsecutiveDeclarations: true
+# AlignOperands: true
+# AlignTrailingComments: true
+# BreakBeforeBinaryOperators: NonAssignment
+# BreakBeforeTernaryOperators: true
+# BreakBeforeBraces: Allman
+# BreakConstructorInitializers: BeforeComma
+# IndentCaseLabels: true
+# IndentWrappedFunctionNames: true
+# BinPackParameters: false
+# BinPackArguments: false
