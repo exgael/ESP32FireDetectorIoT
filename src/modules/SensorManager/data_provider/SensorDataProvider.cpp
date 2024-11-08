@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "SensorDataProvider.h"
 
 SensorDataProvider::SensorDataProvider(int buffer_size)

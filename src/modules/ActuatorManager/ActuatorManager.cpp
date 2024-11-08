@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "ActuatorManager.h"
 
 ActuatorManager::ActuatorManager(FanController fanController, LedController coolerController,

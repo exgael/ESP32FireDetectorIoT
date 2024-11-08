@@ -2,13 +2,13 @@
  * Author: Benoît Barbier
  */
 
-
 #include "controllers.h"
+
+#include <functional>
+#include <map>
 
 #include "../../ESPConfig.h"
 #include "../../Repoter/index.h"
-#include <map>
-#include <functional>
 
 Controllers::Controllers(const SensorDataProvider& sensorData, FireDetection& fireDetector,
                          TemperatureRegulator& regulator, ActuatorManager& actuatorManager, Reporter& reporter,
@@ -228,7 +228,6 @@ void Controllers::setReportController(Request& req, Response& res) noexcept {
  * @warning This controller returns the index.html
  */
 void Controllers::rootController(Request& req, Response& res) noexcept {
-
     std::map<String, std::function<String()>> placeholderMap = {
         {"TEMPERATURE", [&]() { return String(sensorData.getTemperature()); }},
         {"LIGHT", [&]() { return String(sensorData.getLuminosity()); }},
@@ -246,13 +245,12 @@ void Controllers::rootController(Request& req, Response& res) noexcept {
         {"HT", [&]() { return String(regulator.getHighThreshold()); }},
         {"PRT_IP", [&]() { return reporter.getTargetIP(); }},
         {"PRT_PORT", [&]() { return String(reporter.getTargetPort()); }},
-        {"PRT_T", [&]() { return String(reporter.getTargetSP()); }}
-    };
+        {"PRT_T", [&]() { return String(reporter.getTargetSP()); }}};
 
     // Send
-    res.sendFile("/index.html",  [&](const String& var) { 
+    res.sendFile("/index.html", [&](const String& var) {
         auto it = placeholderMap.find(var);
-        while(it != placeholderMap.end()) {
+        while (it != placeholderMap.end()) {
             return it->second();
         }
         return String();

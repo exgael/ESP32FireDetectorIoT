@@ -2,14 +2,12 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include <ArduinoJson.h>
 #include <ESPAsyncWebServer.h>
 
 #include "../../../library/index.h"
-
 #include "../../ActuatorManager/index.h"
 #include "../../FireDetector/index.h"
 #include "../../SensorManager/index.h"

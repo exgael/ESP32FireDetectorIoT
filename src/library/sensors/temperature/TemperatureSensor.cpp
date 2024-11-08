@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "TemperatureSensor.h"
 
 TemperatureSensor::TemperatureSensor(int pin)

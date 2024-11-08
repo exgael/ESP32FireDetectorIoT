@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include <ESPAsyncWebServer.h>
@@ -19,7 +18,7 @@ class Response {
 
     void send200() { rawRequest->send(statusCode); }
 
-    void sendFile(String filePath, std::function<String (const String& var)> processor) {
+    void sendFile(String filePath, std::function<String(const String& var)> processor) {
         rawRequest->send(SPIFFS, filePath, String(), false, processor);
     }
 

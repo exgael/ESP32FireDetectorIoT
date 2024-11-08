@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 /*** Basic/Static Wifi connection
 
      Fichier wificonnect/wifi_utils.h ***/

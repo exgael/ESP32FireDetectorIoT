@@ -2,12 +2,10 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include "../../library/index.h"
 #include "../SensorManager/index.h"
-#include "../../library/index.h"
 
 class FireDetection {
    public:
@@ -66,7 +64,7 @@ class FireDetection {
      * @return true if the number of reading exceeding threshold is above some %, else false.
      */
     bool checkAlertCondition(int exceedCount, int buffer_size, float thresholdPercentage = 70.0) const noexcept;
-    
+
     template <typename T>
     int countExceedances(const std::deque<T>& buffer, T threshold) const noexcept;
 

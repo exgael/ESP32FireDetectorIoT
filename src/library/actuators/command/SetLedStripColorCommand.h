@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include "../light/strip/LedStripController.h"
@@ -10,7 +9,7 @@
 #include "ICommand.h"
 
 class SetLedStripColorCommand : public ICommand {
-public:
+   public:
     SetLedStripColorCommand(LedStripController* controller, int index, const Color& color)
         : controller(controller), index(index), color(color), logger("SetLedStripColorCommand") {
         if (controller == nullptr) {
@@ -30,10 +29,9 @@ public:
         }
     }
 
-private:
+   private:
     LedStripController* controller;
     int index;
     Color color;
     Logger logger;
 };
-

@@ -2,21 +2,19 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include <queue>
 
-#include "ICommand.h"
 #include "../../logger/index.h"
+#include "ICommand.h"
 
 class CommandQueue {
    public:
-
     CommandQueue();
 
     /**
-     * @brief Add a command to the queue 
+     * @brief Add a command to the queue
      */
     void addCommand(ICommand* command) noexcept;
 

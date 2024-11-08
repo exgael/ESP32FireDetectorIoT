@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "Logger.h"
 
 #include "../../library/index.h"

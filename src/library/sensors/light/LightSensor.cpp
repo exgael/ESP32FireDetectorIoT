@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "LightSensor.h"
 
 LightSensor::LightSensor(int pin) : sensorPin(pin), logger("LightSensor") {}

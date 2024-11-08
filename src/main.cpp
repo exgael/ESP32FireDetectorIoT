@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include <Arduino.h>
 
 #include "modules/ESPManager.h"
@@ -34,13 +33,12 @@ void createManager(ESPServer* server, SensorManager* sensorManager, FireDetectio
 ///////////////////////////////
 
 void setup() {
-
     // Initialize SPIFFS
     SPIFFS.begin(true);
 
     createClock();
     createLogger();
-    
+
     ESPConfig& config = getConfig();
 
     // Initialize ESP Modules

@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "LedStripController.h"
 
 LedStripController::LedStripController(int pin, int numLEDs)

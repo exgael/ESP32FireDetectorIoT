@@ -2,10 +2,8 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
-#include "../../../library/index.h"
 #include "../../../library/index.h"
 
 class SensorReader {

@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include "command/index.h"

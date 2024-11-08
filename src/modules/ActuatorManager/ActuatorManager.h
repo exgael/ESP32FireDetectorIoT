@@ -2,13 +2,12 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include "../../library/index.h"
 
 /**
- * @brief This class provide a central API to excute actuating commands. 
+ * @brief This class provide a central API to excute actuating commands.
  */
 class ActuatorManager {
    public:

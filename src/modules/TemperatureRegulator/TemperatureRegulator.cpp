@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "TemperatureRegulator.h"
 
 TemperatureRegulator::TemperatureRegulator(ActuatorManager& actuatorManager, float lowerBound, float upperBound)

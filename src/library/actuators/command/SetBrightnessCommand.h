@@ -2,15 +2,14 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include "../light/ILedActuator.h"
 #include "ICommand.h"
 
 class SetBrightnessCommand : public ICommand {
-public:
-    SetBrightnessCommand(ILedActuator* controller, int brightness) 
+   public:
+    SetBrightnessCommand(ILedActuator* controller, int brightness)
         : controller(controller), brightness(brightness), logger("SetBrightnessCommand") {
         if (controller == nullptr) {
             throw std::invalid_argument("Controller cannot be null.");
@@ -29,7 +28,7 @@ public:
         }
     }
 
-private:
+   private:
     ILedActuator* controller;
     int brightness;
     Logger logger;

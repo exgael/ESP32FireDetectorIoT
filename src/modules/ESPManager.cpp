@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "ESPManager.h"
 
 ESPManager::ESPManager(ESPServer& server, SensorManager& sensorManager, FireDetection& fireDetector,

@@ -2,13 +2,12 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include <WiFi.h>
 
-#include "../ESPConfig.h"
 #include "../../library/index.h"
+#include "../ESPConfig.h"
 
 /**
  * @brief wrap wifi_utils and add loggings

@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 #include <functional>
 
@@ -75,4 +74,4 @@ inline MiddlewareFunction errorHandler(Logger& Logger) {
         }
     };
 }
-}
+}  // namespace Middleware

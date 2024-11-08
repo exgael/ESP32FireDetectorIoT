@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #define USE_SERIAL Serial
@@ -11,6 +10,7 @@
 #include <ArduinoJson.h>
 #include <ESPAsyncWebServer.h>
 #include <SPIFFS.h>
+
 #include "ESPConfig.h"
 #include "FireDetector/index.h"
 #include "Repoter/index.h"
@@ -30,7 +30,6 @@ class ESPManager {
     void executeWorkflow();
 
    private:
-    
     ESPServer& server;
     SensorManager& sensorManager;
     FireDetection& fireDetector;

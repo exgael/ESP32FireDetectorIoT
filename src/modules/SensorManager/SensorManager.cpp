@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "SensorManager.h"
 
 SensorManager::SensorManager(TemperatureSensor tempSensor, LightSensor lightSensor, int buffer_size)

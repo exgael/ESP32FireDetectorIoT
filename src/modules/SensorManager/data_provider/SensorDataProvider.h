@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include <deque>
@@ -27,7 +26,6 @@ class SensorDataProvider {
     const std::deque<float>& getHistoricalTemperature() const;
 
    private:
-
     // last reading
     int luminosity = 0;
     float temperature = 0.0;

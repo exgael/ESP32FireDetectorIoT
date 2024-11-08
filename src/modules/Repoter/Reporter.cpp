@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "Reporter.h"
 
 #include "../ESPConfig.h"

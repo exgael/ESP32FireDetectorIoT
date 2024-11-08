@@ -2,15 +2,14 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include "../fan/FanController.h"
 #include "ICommand.h"
 
 class SetFanLevelCommand : public ICommand {
-public:
-    SetFanLevelCommand(FanController* controller, int level) 
+   public:
+    SetFanLevelCommand(FanController* controller, int level)
         : controller(controller), level(level), logger("SetFanLevelCommand") {
         if (controller == nullptr) {
             throw std::invalid_argument("Controller cannot be null.");
@@ -29,7 +28,7 @@ public:
         }
     }
 
-private:
+   private:
     FanController* controller;
     int level;
     Logger logger;

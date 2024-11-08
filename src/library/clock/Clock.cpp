@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "Clock.h"
 
 Clock& Clock::sharedInstance() {

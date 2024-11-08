@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "FanController.h"
 
 FanController::FanController(int pin, int pwmChannel)
@@ -35,6 +34,4 @@ void FanController::setLevel(int level) noexcept {
     logger.debug("FAN speed %d -> %d.", currentSpeed, level);
 }
 
- int FanController::getCurrentSpeed() const noexcept {
-    return currentSpeed;
- }
+int FanController::getCurrentSpeed() const noexcept { return currentSpeed; }

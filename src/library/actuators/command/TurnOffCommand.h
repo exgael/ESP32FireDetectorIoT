@@ -2,14 +2,13 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include "../IActuator.h"
 #include "ICommand.h"
 
 class TurnOffCommand : public ICommand {
-public:
+   public:
     TurnOffCommand(IActuator* controller) : controller(controller), logger("TurnOffCommand") {
         if (controller == nullptr) {
             throw std::invalid_argument("Controller cannot be null.");
@@ -28,7 +27,7 @@ public:
         }
     }
 
-private:
+   private:
     IActuator* controller;
     Logger logger;
 };

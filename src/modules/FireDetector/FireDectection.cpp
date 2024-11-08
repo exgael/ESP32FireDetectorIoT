@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "FireDetection.h"
 
 FireDetection::FireDetection(const SensorDataProvider& data, float temperatureThreshold, int luminosityThreshold,

@@ -2,11 +2,9 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include "../../library/index.h"
-
 #include "../ActuatorManager/index.h"
 #include "../SensorManager/index.h"
 

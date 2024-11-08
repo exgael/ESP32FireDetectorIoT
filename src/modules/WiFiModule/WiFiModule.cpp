@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "WiFiModule.h"
 
 WiFiModule::WiFiModule(const String& hostname, const String& ssid, const String& password)
@@ -38,7 +37,8 @@ void WiFiModule::printStatus() const noexcept {
     logger.info("	MAC address : %s", WiFi.macAddress().c_str());
     logger.info("	SSID : %s", WiFi.SSID().c_str());
     logger.info("	Received Sig Strength Indication :  %sdBm", String(WiFi.RSSI()).c_str());
-    logger.info("	Received Sig Strength Indication : %s", String(constrain(2 * (WiFi.RSSI() + 100), 0, 100)).c_str());
+    logger.info("	Received Sig Strength Indication : %s",
+                String(constrain(2 * (WiFi.RSSI() + 100), 0, 100)).c_str());
     logger.info("	BSSID : %s", WiFi.BSSIDstr().c_str());
     logger.info("	Encryption type : ", translateEncryptionType(WiFi.encryptionType(0)));
     logger.info("");

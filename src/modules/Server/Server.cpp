@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #include "Server.h"
 
 ESPServer::ESPServer(AsyncWebServer& server, const SensorDataProvider& sensorData, FireDetection& fireDetector,

@@ -2,14 +2,13 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 
 #include <ArduinoJson.h>
 #include <HTTPClient.h>
 
-#include "../Server/index.h"
 #include "../../library/index.h"
+#include "../Server/index.h"
 
 class Reporter {
    public:
@@ -20,7 +19,8 @@ class Reporter {
 
     // Reporting
     void handlePeriodicReporting(const SensorDataProvider& sensorData, FireDetection& fireDetector,
-                                 TemperatureRegulator& regulator, ActuatorManager& actuatorManager, WiFiModule& wifiModule);
+                                 TemperatureRegulator& regulator, ActuatorManager& actuatorManager,
+                                 WiFiModule& wifiModule);
 
     String getTargetIP() const noexcept { return target_ip; }
 
@@ -42,7 +42,8 @@ class Reporter {
     void send(HTTPClient& http, String& jsonString);
     String buildReportUrl();
     String preparerJsonPayload(const SensorDataProvider& sensorData, FireDetection& fireDetector,
-                               TemperatureRegulator& regulator, ActuatorManager& actuatorManager, WiFiModule& wifiModule);
+                               TemperatureRegulator& regulator, ActuatorManager& actuatorManager,
+                               WiFiModule& wifiModule);
     void configureHTTTP(HTTPClient& http);
 
     Logger logger;

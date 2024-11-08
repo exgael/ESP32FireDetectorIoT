@@ -2,7 +2,6 @@
  * Author: Benoît Barbier
  */
 
-
 #pragma once
 #include <Arduino.h>
 
@@ -25,7 +24,7 @@ class Clock {
 
     /**
      * @brief Check if a certain amount of time has passed.
-     * 
+     *
      * Also reset the timer as a side effect if enough time as passed.
      */
     bool hasTimePassed(unsigned long& timer, unsigned long interval);

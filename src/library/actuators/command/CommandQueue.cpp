@@ -2,13 +2,12 @@
  * Author: Benoît Barbier
  */
 
-
 #include "CommandQueue.h"
 
 CommandQueue::CommandQueue() : logger("CommandQueue") {}
 
-void CommandQueue::addCommand(ICommand* command) noexcept { 
-    if (command) { // Only add non-null commands
+void CommandQueue::addCommand(ICommand* command) noexcept {
+    if (command) {  // Only add non-null commands
         commandQueue.push(command);
     }
 }
@@ -39,4 +38,3 @@ void CommandQueue::processCommands() noexcept {
         logger.error("Unknown error occurred while processing the command queue.");
     }
 }
-
