@@ -1,6 +1,10 @@
 # ESP32FireDetectorIoT
 
+https://github.com/exgael/ESP32FireDetectorIoT.git
+
 Il y a une problem de memoire qui arrive de temps en temps en debut d execution. S'il n'arrive pas tot, alors pas de probleme. Je n'ai pas encore fait toutes les `pre-conditions/post-conditions check` pour trouver la cause. 
+
+I found the error. global renaming affected external libraries.
 
 ## Run CURL script 
 ```bash
