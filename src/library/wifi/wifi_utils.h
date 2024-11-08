@@ -1,6 +1,3 @@
-/*
- * Author: Benoît Barbier
- */
 
 /*** Basic/Static Wifi connection
 
