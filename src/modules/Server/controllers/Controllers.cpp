@@ -132,7 +132,7 @@ void Controllers::setValuesController(Request& req, Response& res) {
                 int newLowThreshold = paramValue.toInt();
                 regulator.setLowThreshold(newLowThreshold);
                 foundValidParam = true;
-            } else if (paramName == "lt") {
+            } else if (paramName == "ht") {
                 int newLowThreshold = paramValue.toInt();
                 regulator.setHighThreshold(newLowThreshold);
                 foundValidParam = true;

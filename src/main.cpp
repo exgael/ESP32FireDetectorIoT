@@ -56,6 +56,7 @@ void setup() {
         createServerModule(sensorManager, fireDetector, regulator, actuatorManager, reporter, wifiModule, config);
 
     createManager(server, sensorManager, fireDetector, regulator, actuatorManager, reporter, wifiModule);
+    espManager->init();
 }
 
 //////////////////////////////
@@ -117,5 +118,4 @@ void createManager(ESPServer* server, SensorManager* sensorManager, FireDetectio
                    WiFiModule* wifiModule) {
     espManager =
         new ESPManager(*server, *sensorManager, *fireDetector, *regulator, *actuatorManager, *reporter, *wifiModule);
-    espManager->init();
 }

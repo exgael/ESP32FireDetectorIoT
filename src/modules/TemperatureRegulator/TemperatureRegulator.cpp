@@ -113,7 +113,7 @@ void TemperatureRegulator::setLowThreshold(const float newThreshold) noexcept {
     }
 }
 void TemperatureRegulator::setHighThreshold(const float newThreshold) noexcept {
-    if (newThreshold < lowerBound) {
+    if (newThreshold > lowerBound) {
         upperBound = newThreshold;
     }
 }
