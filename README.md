@@ -2,9 +2,11 @@
 
 https://github.com/exgael/ESP32FireDetectorIoT.git
 
-Il y a une problem de memoire qui arrive de temps en temps en debut d execution. S'il n'arrive pas tot, alors pas de probleme. Je n'ai pas encore fait toutes les `pre-conditions/post-conditions check` pour trouver la cause. 
-
-I found the error. global renaming affected external libraries.
+Points à améliorer :
+1. Ajouter des validations middleware pour les entrées.
+2. Utiliser le dossier `include` (j'ai utilisé des `index.h` comme en serveur côté JS/TS).
+3. Une erreur survient lorsqu'une demande de reporting est lancée à un moment spécifique de la boucle.
+4. J'ai un mélange de `snake_case` et de `CamelCase`; j'ai fait la transition vers `CamelCase`, mais il en reste encore un peu.
 
 ## Run CURL script 
 ```bash
