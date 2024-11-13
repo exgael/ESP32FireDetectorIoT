@@ -18,8 +18,17 @@ class Reporter {
    public:
     Reporter();
 
+     
+
     // Reporter Setter
     void setNewReporting(String target_ip, int target_port, int target_sp);
+
+    String getPayload(    
+        const SensorManager &sensorData,
+        FireDetector &fireDetector,
+        TemperatureRegulator &regulator,
+        ActuatorManager &actuatorManager,
+        WiFiModule &wifiModule);
 
     // Reporting
     void handlePeriodicReporting(

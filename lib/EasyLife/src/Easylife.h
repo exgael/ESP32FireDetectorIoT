@@ -10,3 +10,4 @@
 #include "sensors/index.h"
 #include "server/index.h"
 #include "wifi/index.h"
+#include "mqtt/index.h"

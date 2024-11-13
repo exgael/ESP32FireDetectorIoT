@@ -4,11 +4,13 @@
 
 #include "ESPManager.h"
 #include "Server/Route.h"
+#include "MQTT/Callback.h"
 
 #include <map>
 
 ESPManager::ESPManager(
     EasyServer &server,
+    EasyMQTT &mqttClient,
     SensorManager &sensorManager,
     FireDetector &fireDetector,
     TemperatureRegulator &regulator,
@@ -16,6 +18,7 @@ ESPManager::ESPManager(
     Reporter &reporter,
     WiFiModule &wifiModule)
     : server(server),
+      mqttClient(mqttClient),
       sensorManager(sensorManager),
       fireDetector(fireDetector),
       regulator(regulator),
@@ -35,6 +38,7 @@ void ESPManager::init()
     sensorManager.init();
     actuatorManager.init();
     server.init();
+    mqttClient.init();
 
     setupRouteHandlers(
         server,
@@ -46,6 +50,12 @@ void ESPManager::init()
         reporter,
         logger);
 
+    setupCallback(
+        mqttClient, 
+        actuatorManager, 
+        logger
+    );
+
     logger.info("");
     logger.info("******* ESP Ready *******");
     logger.info("");
@@ -54,6 +64,8 @@ void ESPManager::init()
 void ESPManager::executeWorkflow()
 {
     Clock::sharedInstance().update();
+
+    mqttClient.subscribe(ESPConfig::sharedInstance().TOPIC_TEMP, 0);
 
     if (Clock::sharedInstance().hasTimePassed(tick, interval)) {
         executingMainPipeline = true;
@@ -73,15 +85,25 @@ void ESPManager::executeWorkflow()
         // Increment main pipeline iteration count
         iter++;
         executingMainPipeline = false;
-    }
 
-    if (executingMainPipeline == false) { // Protecting
-        // Reporting
-        reporter.handlePeriodicReporting(
+        String payload = reporter.getPayload(
             sensorManager,
             fireDetector,
             regulator,
             actuatorManager,
             wifiModule);
+
+        mqttClient.publish(ESPConfig::sharedInstance().TOPIC_TEMP, payload);
+        mqttClient.loop();
     }
+
+    // if (executingMainPipeline == false) { // Protecting
+    //     // Reporting
+    //     reporter.handlePeriodicReporting(
+    //         sensorManager,
+    //         fireDetector,
+    //         regulator,
+    //         actuatorManager,
+    //         wifiModule);
+    // }
 }

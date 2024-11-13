@@ -28,11 +28,11 @@ class ESPConfig {
     // YOU CAN CHANGE HERE :
     WifiType wifiType = WifiType::BASIC;
 
-    String SSID = "Numericable-ab9e";
-    String PSSWD = "gexlg2s9565t";
+    //String SSID = "Numericable-ab9e";
+    //String PSSWD = "gexlg2s9565t";
 
-    // String SSID = "iphone";
-    // String PSSWD = "Yousra266!";
+    String SSID = "iphone";
+    String PSSWD = "Yousra266!";
 
     ///////////////////////////
     //    SERVER SETTINGS    //
@@ -42,17 +42,25 @@ class ESPConfig {
     String USER = "Meeee";
 
     ///////////////////////////
+    //     MQTT SETTINGS     //
+    ///////////////////////////
+
+    String MQTT_SERVER = "test.mosquitto.org";
+    String TOPIC_TEMP = "uca/iot/piscine";
+    String TOPIC_LED = "uca/iot/led";
+
+    ///////////////////////////
     //   DEVICE INFORMATION  //
     ///////////////////////////
 
     // Identification
     String NAME = "IoT - Device 001";
-    String IDENT = "ESP32 Dev Module";
+    String IDENT = "Benoit Barbier";
     String ROOM = "3C";
     String ADDRESS = "Les Lucioles";
     String LOC = "Biot";
-    double LATITUDE = 0.0;
-    double LONGITUDE = 0.0;
+    double LATITUDE = 43.666672;
+    double LONGITUDE = 7.15;
 
     ///////////////////////////
     //       PIN CONFIG      //

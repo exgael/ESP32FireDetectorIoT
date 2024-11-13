@@ -70,6 +70,17 @@ String Reporter::buildReportUrl()
     return "http://" + target_ip + ":" + String(target_port) + reporter_route;
 }
 
+String Reporter::getPayload(
+    const SensorManager &sensorData,
+    FireDetector &fireDetector,
+    TemperatureRegulator &regulator,
+    ActuatorManager &actuatorManager,
+    WiFiModule &wifiModule
+) {
+    return preparerJsonPayload(
+        sensorData, fireDetector, regulator, actuatorManager, wifiModule); 
+} 
+
 String Reporter::preparerJsonPayload(
     const SensorManager &sensorData,
     FireDetector &fireDetector,
@@ -118,10 +129,15 @@ String Reporter::preparerJsonPayload(
     net["ip"] = wifiModule.getIP();
 
     // Report host configuration object
-    JsonObject Repoterhost = json["reporthost"].to<JsonObject>();
-    Repoterhost["target_ip"] = target_ip;
-    Repoterhost["target_port"] = target_port;
-    Repoterhost["sp"] = target_sp;
+    JsonObject repoterhost = json["reporthost"].to<JsonObject>();
+    repoterhost["target_ip"] = target_ip;
+    repoterhost["target_port"] = target_port;
+    repoterhost["sp"] = target_sp;
+
+    // Piscine object
+    JsonObject piscine = json["pscine"].to<JsonObject>();
+    piscine["hotspot"] = false;
+    piscine["occuped"] = false;
 
     String jsonString;
     serializeJson(json, jsonString);

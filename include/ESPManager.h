@@ -23,6 +23,7 @@ class ESPManager {
    public:
     ESPManager(
         EasyServer &server,
+        EasyMQTT &mqttClient,
         SensorManager &sensorManager,
         FireDetector &fireDetector,
         TemperatureRegulator &regulator,
@@ -35,6 +36,7 @@ class ESPManager {
 
    private:
     EasyServer &server;
+    EasyMQTT &mqttClient;
     SensorManager &sensorManager;
     FireDetector &fireDetector;
     TemperatureRegulator &regulator;

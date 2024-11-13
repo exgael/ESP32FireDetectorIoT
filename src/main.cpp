@@ -26,8 +26,10 @@ TemperatureRegulator *createRegulationModule(
 Reporter *createReportModule();
 WiFiModule *createWiFiModule(ESPConfig &config);
 EasyServer *createServer(ESPConfig &config);
+EasyMQTT *createMQTTPubSub(ESPConfig &config);
 void createManager(
     EasyServer *server,
+    EasyMQTT *mqttClient,
     SensorManager *sensorManager,
     FireDetector *fireDetector,
     TemperatureRegulator *regulator,
@@ -61,9 +63,11 @@ void setup()
         createRegulationModule(actuatorManager, config);
     Reporter *reporter = createReportModule();
     EasyServer *server = createServer(config);
+    EasyMQTT *mqttClient = createMQTTPubSub(config);
 
     createManager(
         server,
+        mqttClient,
         sensorManager,
         fireDetector,
         regulator,
@@ -162,8 +166,14 @@ EasyServer *createServer(ESPConfig &config)
     return new EasyServer(config.PORT);
 }
 
+EasyMQTT *createMQTTPubSub(ESPConfig &config) 
+{
+    return new EasyMQTT(config.IDENT, config.MQTT_SERVER);
+}
+
 void createManager(
     EasyServer *server,
+    EasyMQTT *mqttClient,
     SensorManager *sensorManager,
     FireDetector *fireDetector,
     TemperatureRegulator *regulator,
@@ -173,6 +183,7 @@ void createManager(
 {
     espManager = new ESPManager(
         *server,
+        *mqttClient,
         *sensorManager,
         *fireDetector,
         *regulator,
