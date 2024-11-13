@@ -9,7 +9,10 @@
 
 class SensorManager {
    public:
-    SensorManager(TemperatureSensor tempSensor, LightSensor lightSensor, int buffer_size);
+    SensorManager(
+        TemperatureSensor tempSensor,
+        LightSensor lightSensor,
+        int buffer_size);
 
     /**
      * @brief Read sensors and store readings in in-memory storage.
@@ -19,12 +22,12 @@ class SensorManager {
     void init();
 
     // Get data
-    const int& getLuminosity() const;
-    const float& getTemperature() const;
+    const int &getLuminosity() const;
+    const float &getTemperature() const;
 
     // Get historical data
-    const std::deque<int>& getHistoricalLuminosity() const;
-    const std::deque<float>& getHistoricalTemperature() const;
+    const std::deque<int> &getHistoricalLuminosity() const;
+    const std::deque<float> &getHistoricalTemperature() const;
 
    private:
     TemperatureSensor tempSensor;

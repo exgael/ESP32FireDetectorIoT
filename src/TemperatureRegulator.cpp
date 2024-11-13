@@ -5,18 +5,21 @@
 #include "TemperatureRegulator.h"
 
 TemperatureRegulator::TemperatureRegulator(
-    ActuatorManager& actuatorManager, 
-    float lowerBound, 
-    float upperBound
-): 
-    actuatorManager(actuatorManager),
-    lowerBound(lowerBound),
-    upperBound(upperBound),
-    current_state(State::HALT),
-    logger("TemperatureRegulator") {
+    ActuatorManager &actuatorManager,
+    float lowerBound,
+    float upperBound)
+    : actuatorManager(actuatorManager),
+      lowerBound(lowerBound),
+      upperBound(upperBound),
+      current_state(State::HALT),
+      logger("TemperatureRegulator")
+{
 }
 
-void TemperatureRegulator::regulate(const SensorManager& data, const bool isFireDetected) {
+void TemperatureRegulator::regulate(
+    const SensorManager &data,
+    const bool isFireDetected)
+{
     float temperature = data.getTemperature();
 
     // Handle emergency halt
@@ -56,11 +59,16 @@ void TemperatureRegulator::regulate(const SensorManager& data, const bool isFire
     }
 }
 
-String TemperatureRegulator::describeState() const {
-    return (current_state == State::HEATING || current_state == State::COOLING) ? "RUNNING" : "HALT";
+String TemperatureRegulator::describeState() const
+{
+    return (current_state == State::HEATING ||
+            current_state == State::COOLING) ?
+        "RUNNING" :
+        "HALT";
 }
 
-void TemperatureRegulator::cool(const float temperature) {
+void TemperatureRegulator::cool(const float temperature)
+{
     int fanLevel = map(temperature, upperBound, upperBound + 5, 192, 255);
     fanLevel = constrain(fanLevel, 192, 255);
 
@@ -75,7 +83,8 @@ void TemperatureRegulator::cool(const float temperature) {
     actuatorManager.requestLedStripRed(ledStripLevel);
 }
 
-void TemperatureRegulator::heat(const float temperature) {
+void TemperatureRegulator::heat(const float temperature)
+{
     actuatorManager.requestFanOff();
     actuatorManager.requestCoolerOff();
     actuatorManager.requestHeaterOn();
@@ -86,7 +95,8 @@ void TemperatureRegulator::heat(const float temperature) {
     actuatorManager.requestLedStripGreen(ledStripLevel);
 }
 
-void TemperatureRegulator::halt(const float temperature) {
+void TemperatureRegulator::halt(const float temperature)
+{
     actuatorManager.requestFanOff();
     actuatorManager.requestCoolerOff();
     actuatorManager.requestHeaterOff();
@@ -96,7 +106,8 @@ void TemperatureRegulator::halt(const float temperature) {
     actuatorManager.requestLedStripOrange(ledStripLevel);
 }
 
-void TemperatureRegulator::emergencyHalt() {
+void TemperatureRegulator::emergencyHalt()
+{
     actuatorManager.requestFanOff();
     actuatorManager.requestCoolerOff();
     actuatorManager.requestHeaterOff();
@@ -105,18 +116,32 @@ void TemperatureRegulator::emergencyHalt() {
     actuatorManager.requestLedStripRed(5);
 }
 
-bool TemperatureRegulator::isCooling() const noexcept { return current_state == State::COOLING; }
+bool TemperatureRegulator::isCooling() const noexcept
+{
+    return current_state == State::COOLING;
+}
 
-bool TemperatureRegulator::isHeating() const noexcept { return current_state == State::HEATING; }
+bool TemperatureRegulator::isHeating() const noexcept
+{
+    return current_state == State::HEATING;
+}
 
-int TemperatureRegulator::getLowThreshold() const noexcept { return lowerBound; }
-int TemperatureRegulator::getHighThreshold() const noexcept { return upperBound; }
-void TemperatureRegulator::setLowThreshold(const float newThreshold) noexcept {
+int TemperatureRegulator::getLowThreshold() const noexcept
+{
+    return lowerBound;
+}
+int TemperatureRegulator::getHighThreshold() const noexcept
+{
+    return upperBound;
+}
+void TemperatureRegulator::setLowThreshold(const float newThreshold) noexcept
+{
     if (newThreshold < upperBound) {
         lowerBound = newThreshold;
     }
 }
-void TemperatureRegulator::setHighThreshold(const float newThreshold) noexcept {
+void TemperatureRegulator::setHighThreshold(const float newThreshold) noexcept
+{
     if (newThreshold > lowerBound) {
         upperBound = newThreshold;
     }

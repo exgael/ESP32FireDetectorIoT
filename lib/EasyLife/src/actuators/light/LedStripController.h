@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <Adafruit_NeoPixel.h>
-
-#include "ILedActuator.h"
 #include "Color.h"
+#include "ILedActuator.h"
+
+#include <Adafruit_NeoPixel.h>
 
 class LedStripController : public ILedActuator {
    public:
@@ -37,7 +37,7 @@ class LedStripController : public ILedActuator {
     /**
      * @brief Set a single color on a specific LED
      */
-    void setColor(int index, const Color& color) noexcept;
+    void setColor(int index, const Color &color) noexcept;
 
     /**
      * @brief Set a gauge pattern with specified color, percentage, and order.
@@ -45,7 +45,10 @@ class LedStripController : public ILedActuator {
      * Percentage is used as it enables to decouple the quantity from the actual
      * #of leds.
      */
-    void setGaugePattern(const Color& color, float percentage, bool ascending = true) noexcept;
+    void setGaugePattern(
+        const Color &color,
+        float percentage,
+        bool ascending = true) noexcept;
 
    private:
     Adafruit_NeoPixel strip;

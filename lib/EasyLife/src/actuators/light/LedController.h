@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <Arduino.h>
-
 #include "ILedActuator.h"
+
+#include <Arduino.h>
 
 class LedController : public ILedActuator {
    public:

@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <Arduino.h>
-
 #include "../IActuator.h"
+
+#include <Arduino.h>
 
 class FanController : public IActuator {
    public:

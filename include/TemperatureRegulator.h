@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <EasyLife.h>
-
 #include "ActuatorManager.h"
 #include "SensorManager.h"
+
+#include <EasyLife.h>
 
 /**
  * @brief This module handles the temperature regulation, actionning actuators
@@ -17,13 +17,16 @@ class TemperatureRegulator {
    public:
     enum class State { HALT, COOLING, HEATING, EMERGENCY_HALT };
 
-    TemperatureRegulator(ActuatorManager& actuatorManager, float lowerBound, float upperBound);
+    TemperatureRegulator(
+        ActuatorManager &actuatorManager,
+        float lowerBound,
+        float upperBound);
 
     ///////////////////////
     //    REGULATION     //
     ///////////////////////
 
-    void regulate(const SensorManager& data, const bool isFireDetected);
+    void regulate(const SensorManager &data, const bool isFireDetected);
 
     ///////////////////////
     //      STATES       //
@@ -61,6 +64,6 @@ class TemperatureRegulator {
     float lowerBound;
     float upperBound;
 
-    ActuatorManager& actuatorManager;
+    ActuatorManager &actuatorManager;
     Logger logger;
 };

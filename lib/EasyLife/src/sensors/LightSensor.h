@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <Arduino.h>
-
 #include "ISensor.h"
+
+#include <Arduino.h>
 
 class LightSensor : public ISensor {
    public:

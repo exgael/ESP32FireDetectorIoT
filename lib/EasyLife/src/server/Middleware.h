@@ -3,10 +3,10 @@
  */
 
 #pragma once
-#include <functional>
-
 #include "Request.h"
 #include "Response.h"
+
+#include <functional>
 
 /**
  * @brief Used to signal to move to the next handler
@@ -20,7 +20,8 @@ using NextFunction = std::function<void()>;
  * Provide the context of the Request/Response, allow to move to the next
  * handler.
  */
-using MiddlewareFunction = std::function<void(Request&, Response&, NextFunction)>;
+using MiddlewareFunction =
+    std::function<void(Request &, Response &, NextFunction)>;
 
 /**
  * @brief Represent a constructed pipeline of middleware to process
@@ -30,4 +31,4 @@ using MiddlewareChain = std::vector<MiddlewareFunction>;
 /**
  * @brief Represent a controller class
  */
-using Handler = std::function<void(Request&, Response&)>;
+using Handler = std::function<void(Request &, Response &)>;

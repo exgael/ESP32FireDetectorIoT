@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <Arduino.h>
-
 #include "ILedActuator.h"
 #include "LedController.h"
+
+#include <Arduino.h>
 
 class OnboardLedController : public LedController {
    public:

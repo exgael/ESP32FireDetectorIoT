@@ -11,8 +11,12 @@
  */
 class ActuatorManager {
    public:
-    ActuatorManager(FanController fanController, LedController coolerController, LedController heaterController,
-                    OnboardLedController fireAlarmController, LedStripController ledStripController);
+    ActuatorManager(
+        FanController fanController,
+        LedController coolerController,
+        LedController heaterController,
+        OnboardLedController fireAlarmController,
+        LedStripController ledStripController);
 
     // Fan
     void requestFanOn() noexcept;
@@ -72,5 +76,5 @@ class ActuatorManager {
     /**
      * @brief Helper method to add a command.
      */
-    void addCommand(ICommand* command) noexcept;
+    void addCommand(ICommand *command) noexcept;
 };

@@ -4,15 +4,15 @@
 
 #pragma once
 
-#include <ArduinoJson.h>
-#include <HTTPClient.h>
-#include <EasyLife.h>
-
 #include "ESPConfig.h"
 #include "FireDetector.h"
 #include "SensorManager.h"
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
+
+#include <ArduinoJson.h>
+#include <EasyLife.h>
+#include <HTTPClient.h>
 
 class Reporter {
    public:
@@ -22,15 +22,27 @@ class Reporter {
     void setNewReporting(String target_ip, int target_port, int target_sp);
 
     // Reporting
-    void handlePeriodicReporting(const SensorManager& sensorData, FireDetector& fireDetector,
-                                 TemperatureRegulator& regulator, ActuatorManager& actuatorManager,
-                                 WiFiModule& wifiModule);
+    void handlePeriodicReporting(
+        const SensorManager &sensorData,
+        FireDetector &fireDetector,
+        TemperatureRegulator &regulator,
+        ActuatorManager &actuatorManager,
+        WiFiModule &wifiModule);
 
-    String getTargetIP() const noexcept { return target_ip; }
+    String getTargetIP() const noexcept
+    {
+        return target_ip;
+    }
 
-    int getTargetPort() const noexcept { return target_port; }
+    int getTargetPort() const noexcept
+    {
+        return target_port;
+    }
 
-    int getTargetSP() const noexcept { return target_sp; }
+    int getTargetSP() const noexcept
+    {
+        return target_sp;
+    }
 
    private:
     String reporter_route = "/esp";
@@ -40,15 +52,18 @@ class Reporter {
 
     // Report timer
     unsigned long tick = 0;
-    Clock& clock = Clock::sharedInstance();
+    Clock &clock = Clock::sharedInstance();
 
     bool isReporting();
-    void send(HTTPClient& http, String& jsonString);
+    void send(HTTPClient &http, String &jsonString);
     String buildReportUrl();
-    String preparerJsonPayload(const SensorManager& sensorData, FireDetector& fireDetector,
-                               TemperatureRegulator& regulator, ActuatorManager& actuatorManager,
-                               WiFiModule& wifiModule);
-    void configureHTTTP(HTTPClient& http);
+    String preparerJsonPayload(
+        const SensorManager &sensorData,
+        FireDetector &fireDetector,
+        TemperatureRegulator &regulator,
+        ActuatorManager &actuatorManager,
+        WiFiModule &wifiModule);
+    void configureHTTTP(HTTPClient &http);
 
     Logger logger;
 };

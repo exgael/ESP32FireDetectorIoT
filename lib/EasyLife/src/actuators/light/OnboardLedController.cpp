@@ -4,4 +4,6 @@
 
 #include "OnboardLedController.h"
 
-OnboardLedController::OnboardLedController() : LedController(2) {}
+OnboardLedController::OnboardLedController() : LedController(2)
+{
+}

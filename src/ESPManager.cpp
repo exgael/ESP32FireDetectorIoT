@@ -4,28 +4,30 @@
 
 #include "ESPManager.h"
 #include "Server/Route.h"
+
 #include <map>
 
 ESPManager::ESPManager(
-    EasyServer& server, 
-    SensorManager& sensorManager, 
-    FireDetector& fireDetector,
-    TemperatureRegulator& regulator, 
-    ActuatorManager& actuatorManager, 
-    Reporter& reporter,
-    WiFiModule& wifiModule
-):
-    server(server),
-    sensorManager(sensorManager),
-    fireDetector(fireDetector),
-    regulator(regulator),
-    actuatorManager(actuatorManager),
-    reporter(reporter),
-    wifiModule(wifiModule),
-    logger("ESPManager") {
+    EasyServer &server,
+    SensorManager &sensorManager,
+    FireDetector &fireDetector,
+    TemperatureRegulator &regulator,
+    ActuatorManager &actuatorManager,
+    Reporter &reporter,
+    WiFiModule &wifiModule)
+    : server(server),
+      sensorManager(sensorManager),
+      fireDetector(fireDetector),
+      regulator(regulator),
+      actuatorManager(actuatorManager),
+      reporter(reporter),
+      wifiModule(wifiModule),
+      logger("ESPManager")
+{
 }
 
-void ESPManager::init() {
+void ESPManager::init()
+{
     logger.info("");
     logger.info("*******   INIT   *******");
     logger.info("");
@@ -42,15 +44,15 @@ void ESPManager::init() {
         fireDetector,
         wifiModule,
         reporter,
-        logger
-    );
+        logger);
 
     logger.info("");
     logger.info("******* ESP Ready *******");
     logger.info("");
 }
 
-void ESPManager::executeWorkflow() {
+void ESPManager::executeWorkflow()
+{
     Clock::sharedInstance().update();
 
     if (Clock::sharedInstance().hasTimePassed(tick, interval)) {
@@ -75,6 +77,11 @@ void ESPManager::executeWorkflow() {
 
     if (executingMainPipeline == false) { // Protecting
         // Reporting
-        reporter.handlePeriodicReporting(sensorManager, fireDetector, regulator, actuatorManager, wifiModule);
+        reporter.handlePeriodicReporting(
+            sensorManager,
+            fireDetector,
+            regulator,
+            actuatorManager,
+            wifiModule);
     }
 }

@@ -2,11 +2,11 @@
  * Author: Benoît Barbier
  */
 
-#include <Arduino.h>
-
 #include "ESPManager.h"
 
-ESPManager* espManager = nullptr;
+#include <Arduino.h>
+
+ESPManager *espManager = nullptr;
 
 ///////////////////////////////
 //   Function declarations   //
@@ -14,55 +14,62 @@ ESPManager* espManager = nullptr;
 
 void createClock();
 void createLogger();
-ESPConfig& getConfig();
-ActuatorManager* createControlModule(ESPConfig& config);
-SensorManager* createSensorModule(ESPConfig& config);
-FireDetector* createFireDetectorModule(
-    SensorManager* sensorManager,
-    ESPConfig& config
-);
-TemperatureRegulator* createRegulationModule(
-    ActuatorManager* actuatorManager,
-    ESPConfig& config
-);
-Reporter* createReportModule();
-WiFiModule* createWiFiModule(ESPConfig& config);
-EasyServer* createServer(ESPConfig& config);
+ESPConfig &getConfig();
+ActuatorManager *createControlModule(ESPConfig &config);
+SensorManager *createSensorModule(ESPConfig &config);
+FireDetector *createFireDetectorModule(
+    SensorManager *sensorManager,
+    ESPConfig &config);
+TemperatureRegulator *createRegulationModule(
+    ActuatorManager *actuatorManager,
+    ESPConfig &config);
+Reporter *createReportModule();
+WiFiModule *createWiFiModule(ESPConfig &config);
+EasyServer *createServer(ESPConfig &config);
 void createManager(
-    EasyServer* server, 
-    SensorManager* sensorManager, 
-    FireDetector* fireDetector,
-    TemperatureRegulator* regulator,
-    ActuatorManager* actuatorManager,
-    Reporter* reporter,
-    WiFiModule* wifiModule
-);
+    EasyServer *server,
+    SensorManager *sensorManager,
+    FireDetector *fireDetector,
+    TemperatureRegulator *regulator,
+    ActuatorManager *actuatorManager,
+    Reporter *reporter,
+    WiFiModule *wifiModule);
 
 ///////////////////////////////
 //           SETUP           //
 ///////////////////////////////
 
-void setup() {
+void setup()
+{
     // Initialize SPIFFS
     SPIFFS.begin(true);
 
     createClock();
     createLogger();
 
-    ESPConfig& config = getConfig();
+    ESPConfig &config = getConfig();
 
     // Initialize ESP Modules
-    WiFiModule* wifiModule = createWiFiModule(config);
+    WiFiModule *wifiModule = createWiFiModule(config);
     wifiModule->init();
 
-    ActuatorManager* actuatorManager = createControlModule(config);
-    SensorManager* sensorManager = createSensorModule(config);
-    FireDetector* fireDetector = createFireDetectorModule(sensorManager, config);
-    TemperatureRegulator* regulator = createRegulationModule(actuatorManager, config);
-    Reporter* reporter = createReportModule();
-    EasyServer* server = createServer(config);
+    ActuatorManager *actuatorManager = createControlModule(config);
+    SensorManager *sensorManager = createSensorModule(config);
+    FireDetector *fireDetector =
+        createFireDetectorModule(sensorManager, config);
+    TemperatureRegulator *regulator =
+        createRegulationModule(actuatorManager, config);
+    Reporter *reporter = createReportModule();
+    EasyServer *server = createServer(config);
 
-    createManager(server, sensorManager, fireDetector, regulator, actuatorManager, reporter, wifiModule);
+    createManager(
+        server,
+        sensorManager,
+        fireDetector,
+        regulator,
+        actuatorManager,
+        reporter,
+        wifiModule);
     espManager->init();
 }
 
@@ -70,66 +77,106 @@ void setup() {
 //           LOOP           //
 //////////////////////////////
 
-void loop() { espManager->executeWorkflow(); }
+void loop()
+{
+    espManager->executeWorkflow();
+}
 
 //////////////////////////////
 //   Function definitions   //
 //////////////////////////////
 
-void createClock() { Clock::sharedInstance().reset(); }
-
-void createLogger() { Logger::begin(9600, LOG_LEVEL_DEBUG); }
-
-ESPConfig& getConfig() { return ESPConfig::sharedInstance(); }
-
-ActuatorManager* createControlModule(ESPConfig& config) {
-    FanController* fanController = new FanController(config.FAN_PIN, config.FAN_PWM_CHANNEL);
-    LedController* acLedController = new LedController(config.AC_LED_PIN);
-    LedController* heaterLedController = new LedController(config.HEATER_LED_PIN);
-    OnboardLedController* onboardLedController = new OnboardLedController();
-    LedStripController* ledStripController = new LedStripController(config.LED_STRIP_PIN, config.LED_STRIP_SIZE);
-
-    return new ActuatorManager(*fanController, *acLedController, *heaterLedController, *onboardLedController,
-                               *ledStripController);
+void createClock()
+{
+    Clock::sharedInstance().reset();
 }
 
-SensorManager* createSensorModule(ESPConfig& config) {
-    TemperatureSensor* tempSensor = new TemperatureSensor(config.TEMP_SENSOR_PIN);
-    LightSensor* lightSensor = new LightSensor(config.LIGHT_SENSOR_PIN);
-    return new SensorManager(*tempSensor, *lightSensor, config.DETECTION_BUFFER_SIZE);
+void createLogger()
+{
+    Logger::begin(9600, LOG_LEVEL_DEBUG);
 }
 
-FireDetector* createFireDetectorModule(SensorManager* sensorManager, ESPConfig& config) {
-    return new FireDetector(*sensorManager, config.FIRE_TEMPERATURE_THRESHOLD,
-                             config.FIRE_LIGHT_THRESHOLD);
+ESPConfig &getConfig()
+{
+    return ESPConfig::sharedInstance();
 }
 
-TemperatureRegulator* createRegulationModule(ActuatorManager* actuatorManager, ESPConfig& config) {
-    return new TemperatureRegulator(*actuatorManager, config.LOW_TEMP, config.HIGH_TEMP);
+ActuatorManager *createControlModule(ESPConfig &config)
+{
+    FanController *fanController =
+        new FanController(config.FAN_PIN, config.FAN_PWM_CHANNEL);
+    LedController *acLedController = new LedController(config.AC_LED_PIN);
+    LedController *heaterLedController =
+        new LedController(config.HEATER_LED_PIN);
+    OnboardLedController *onboardLedController = new OnboardLedController();
+    LedStripController *ledStripController =
+        new LedStripController(config.LED_STRIP_PIN, config.LED_STRIP_SIZE);
+
+    return new ActuatorManager(
+        *fanController,
+        *acLedController,
+        *heaterLedController,
+        *onboardLedController,
+        *ledStripController);
 }
 
-Reporter* createReportModule() { return new Reporter(); }
+SensorManager *createSensorModule(ESPConfig &config)
+{
+    TemperatureSensor *tempSensor =
+        new TemperatureSensor(config.TEMP_SENSOR_PIN);
+    LightSensor *lightSensor = new LightSensor(config.LIGHT_SENSOR_PIN);
+    return new SensorManager(
+        *tempSensor, *lightSensor, config.DETECTION_BUFFER_SIZE);
+}
 
-WiFiModule* createWiFiModule(ESPConfig& config) { return new WiFiModule(config.NAME, config.SSID, config.PSSWD); }
+FireDetector *createFireDetectorModule(
+    SensorManager *sensorManager,
+    ESPConfig &config)
+{
+    return new FireDetector(
+        *sensorManager,
+        config.FIRE_TEMPERATURE_THRESHOLD,
+        config.FIRE_LIGHT_THRESHOLD);
+}
 
-EasyServer* createServer(ESPConfig& config) { return new EasyServer(config.PORT); }
+TemperatureRegulator *createRegulationModule(
+    ActuatorManager *actuatorManager,
+    ESPConfig &config)
+{
+    return new TemperatureRegulator(
+        *actuatorManager, config.LOW_TEMP, config.HIGH_TEMP);
+}
+
+Reporter *createReportModule()
+{
+    return new Reporter();
+}
+
+WiFiModule *createWiFiModule(ESPConfig &config)
+{
+    return new WiFiModule(config.NAME, config.SSID, config.PSSWD);
+}
+
+EasyServer *createServer(ESPConfig &config)
+{
+    return new EasyServer(config.PORT);
+}
 
 void createManager(
-    EasyServer* server,
-    SensorManager* sensorManager,
-    FireDetector* fireDetector,
-    TemperatureRegulator* regulator,
-    ActuatorManager* actuatorManager,
-    Reporter* reporter,
-    WiFiModule* wifiModule
-) {
+    EasyServer *server,
+    SensorManager *sensorManager,
+    FireDetector *fireDetector,
+    TemperatureRegulator *regulator,
+    ActuatorManager *actuatorManager,
+    Reporter *reporter,
+    WiFiModule *wifiModule)
+{
     espManager = new ESPManager(
-        *server, 
-        *sensorManager, 
-        *fireDetector, 
-        *regulator, 
-        *actuatorManager, 
-        *reporter, 
-        *wifiModule
-    );
+        *server,
+        *sensorManager,
+        *fireDetector,
+        *regulator,
+        *actuatorManager,
+        *reporter,
+        *wifiModule);
 }

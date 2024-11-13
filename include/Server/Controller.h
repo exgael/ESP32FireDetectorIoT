@@ -1,14 +1,14 @@
 #pragma once
 
-#include <Easylife.h>
-#include <map>
-
-#include "Reporter.h"
 #include "ESPConfig.h"
 #include "FireDetector.h"
+#include "Reporter.h"
 #include "SensorManager.h"
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
+
+#include <Easylife.h>
+#include <map>
 
 /////////////////////////////
 //          ROOT           //
@@ -18,13 +18,12 @@
  * @brief Handle returning html.index file.
  */
 extern Handler rootControllerHandler(
-    ActuatorManager& actuatorManager,
-    SensorManager& sensorManager,
-    TemperatureRegulator& regulator,
-    FireDetector& fireDetector,
-    WiFiModule& wifiModule,
-    Reporter& reporter
-) noexcept;
+    ActuatorManager &actuatorManager,
+    SensorManager &sensorManager,
+    TemperatureRegulator &regulator,
+    FireDetector &fireDetector,
+    WiFiModule &wifiModule,
+    Reporter &reporter) noexcept;
 
 /////////////////////////////
 //          FETCH          //
@@ -33,11 +32,10 @@ extern Handler rootControllerHandler(
 /**
  * @brief Handles the value fetch.
  */
-extern Handler getValuesControllerHandler(  
-    SensorManager& sensorManager,
-    TemperatureRegulator& regulator,
-    FireDetector& fireDetector
-) noexcept;
+extern Handler getValuesControllerHandler(
+    SensorManager &sensorManager,
+    TemperatureRegulator &regulator,
+    FireDetector &fireDetector) noexcept;
 
 /////////////////////////////
 //           SET           //
@@ -47,11 +45,10 @@ extern Handler getValuesControllerHandler(
  * @brief Handles the value set.
  */
 extern Handler setValuesControllerHandler(
-    ActuatorManager& actuatorManager,
-    SensorManager& sensorManager,
-    TemperatureRegulator& regulator,
-    FireDetector& fireDetector
-);
+    ActuatorManager &actuatorManager,
+    SensorManager &sensorManager,
+    TemperatureRegulator &regulator,
+    FireDetector &fireDetector);
 
 /////////////////////////////
 //          REPORT         //
@@ -61,6 +58,5 @@ extern Handler setValuesControllerHandler(
  * @brief Handle the reporting definition.
  */
 extern Handler setReportControllerHandler(
-    Reporter& reporter,
-    Logger& logger
-) noexcept;
+    Reporter &reporter,
+    Logger &logger) noexcept;

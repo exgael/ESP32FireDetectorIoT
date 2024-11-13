@@ -13,7 +13,8 @@ class ESPConfig {
     /**
      * @brief Get the configuration instance.
      */
-    static ESPConfig& sharedInstance() {
+    static ESPConfig &sharedInstance()
+    {
         static ESPConfig instance;
         return instance;
     }
@@ -30,8 +31,8 @@ class ESPConfig {
     String SSID = "Numericable-ab9e";
     String PSSWD = "gexlg2s9565t";
 
-    //String SSID = "iphone";
-    //String PSSWD = "Yousra266!";
+    // String SSID = "iphone";
+    // String PSSWD = "Yousra266!";
 
     ///////////////////////////
     //    SERVER SETTINGS    //
@@ -94,6 +95,6 @@ class ESPConfig {
 
    private:
     ESPConfig() = default;
-    ESPConfig(const ESPConfig&) = delete;
-    ESPConfig& operator=(const ESPConfig&) = delete;
+    ESPConfig(const ESPConfig &) = delete;
+    ESPConfig &operator=(const ESPConfig &) = delete;
 };

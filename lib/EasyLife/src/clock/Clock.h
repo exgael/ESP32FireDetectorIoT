@@ -12,7 +12,7 @@ class Clock {
     /**
      * @brief Get the singleton instance.
      */
-    static Clock& sharedInstance();
+    static Clock &sharedInstance();
 
     /**
      * @brief Update the clock.
@@ -27,7 +27,7 @@ class Clock {
      *
      * Also reset the timer as a side effect if enough time as passed.
      */
-    bool hasTimePassed(unsigned long& timer, unsigned long interval);
+    bool hasTimePassed(unsigned long &timer, unsigned long interval);
 
     /**
      * @brief Reset clock start time.
@@ -36,11 +36,11 @@ class Clock {
 
    private:
     Clock();
-    Clock(const Clock&) = delete;
-    Clock& operator=(const Clock&) = delete;
+    Clock(const Clock &) = delete;
+    Clock &operator=(const Clock &) = delete;
 
-    unsigned long startTime;    // Start time of the clock
-    unsigned long lastUpdate;   // Last time `update` was called
-    unsigned long deltaTime;    // Time elapsed since last frame (delta time)
-    unsigned long elapsedTime;  // Total elapsed time since clock started
+    unsigned long startTime; // Start time of the clock
+    unsigned long lastUpdate; // Last time `update` was called
+    unsigned long deltaTime; // Time elapsed since last frame (delta time)
+    unsigned long elapsedTime; // Total elapsed time since clock started
 };

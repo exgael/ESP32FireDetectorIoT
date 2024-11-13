@@ -4,17 +4,17 @@
 
 #pragma once
 
-#include <ESPAsyncWebServer.h>
-
 #include "../logger/index.h"
 #include "Middleware.h"
 #include "Request.h"
 #include "Response.h"
 
+#include <ESPAsyncWebServer.h>
+
 class EasyServer {
    public:
     EasyServer(int port);
- 
+
     void init() noexcept;
 
     /**
@@ -25,12 +25,18 @@ class EasyServer {
     /**
      * @brief Adds a `get`route.
      */
-    void get(const String& path, const MiddlewareChain& middleware, Handler handler);
+    void get(
+        const String &path,
+        const MiddlewareChain &middleware,
+        Handler handler);
 
     /**
      * @brief Adds a `post` route.
      */
-    void post(const String& path, const MiddlewareChain& middleware, Handler handler);
+    void post(
+        const String &path,
+        const MiddlewareChain &middleware,
+        Handler handler);
 
     /**
      * @brief On not found.
@@ -42,13 +48,17 @@ class EasyServer {
     AsyncWebServer server;
     Logger logger;
 
-     MiddlewareChain globalMiddleware;
+    MiddlewareChain globalMiddleware;
 
     /**
      * @brief Add route with specific middleware
      * The best part ~(*-*)~
      */
-    void addRoute(const String& path, WebRequestMethod method,
-                  const MiddlewareChain& routeMiddleware, Handler handler);
-    MiddlewareChain buildRouteMiddlewareChain(const MiddlewareChain& routeMiddleware);
+    void addRoute(
+        const String &path,
+        WebRequestMethod method,
+        const MiddlewareChain &routeMiddleware,
+        Handler handler);
+    MiddlewareChain buildRouteMiddlewareChain(
+        const MiddlewareChain &routeMiddleware);
 };

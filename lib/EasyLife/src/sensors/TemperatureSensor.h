@@ -4,10 +4,10 @@
 
 #pragma once
 
+#include "ISensor.h"
+
 #include <DallasTemperature.h>
 #include <OneWire.h>
-
-#include "ISensor.h"
 
 class TemperatureSensor : public ISensor {
    public:
