@@ -4,7 +4,7 @@
 
 #include <Arduino.h>
 
-#include "modules/ESPManager.h"
+#include "ESPManager.h"
 
 ESPManager* espManager = nullptr;
 
@@ -17,16 +17,26 @@ void createLogger();
 ESPConfig& getConfig();
 ActuatorManager* createControlModule(ESPConfig& config);
 SensorManager* createSensorModule(ESPConfig& config);
-FireDetection* createFireDetectionModule(SensorManager* sensorManager, ESPConfig& config);
-TemperatureRegulator* createRegulationModule(ActuatorManager* actuatorManager, ESPConfig& config);
+FireDetector* createFireDetectorModule(
+    SensorManager* sensorManager,
+    ESPConfig& config
+);
+TemperatureRegulator* createRegulationModule(
+    ActuatorManager* actuatorManager,
+    ESPConfig& config
+);
 Reporter* createReportModule();
 WiFiModule* createWiFiModule(ESPConfig& config);
-ESPServer* createServerModule(SensorManager* sensorManager, FireDetection* fireDetector,
-                              TemperatureRegulator* regulator, ActuatorManager* actuatorManager, Reporter* reporter,
-                              WiFiModule* wifiModule, ESPConfig& config);
-void createManager(ESPServer* server, SensorManager* sensorManager, FireDetection* fireDetector,
-                   TemperatureRegulator* regulator, ActuatorManager* actuatorManager, Reporter* reporter,
-                   WiFiModule* wifiModule);
+EasyServer* createServer(ESPConfig& config);
+void createManager(
+    EasyServer* server, 
+    SensorManager* sensorManager, 
+    FireDetector* fireDetector,
+    TemperatureRegulator* regulator,
+    ActuatorManager* actuatorManager,
+    Reporter* reporter,
+    WiFiModule* wifiModule
+);
 
 ///////////////////////////////
 //           SETUP           //
@@ -44,14 +54,13 @@ void setup() {
     // Initialize ESP Modules
     WiFiModule* wifiModule = createWiFiModule(config);
     wifiModule->init();
+
     ActuatorManager* actuatorManager = createControlModule(config);
     SensorManager* sensorManager = createSensorModule(config);
-    FireDetection* fireDetector = createFireDetectionModule(sensorManager, config);
+    FireDetector* fireDetector = createFireDetectorModule(sensorManager, config);
     TemperatureRegulator* regulator = createRegulationModule(actuatorManager, config);
     Reporter* reporter = createReportModule();
-
-    ESPServer* server =
-        createServerModule(sensorManager, fireDetector, regulator, actuatorManager, reporter, wifiModule, config);
+    EasyServer* server = createServer(config);
 
     createManager(server, sensorManager, fireDetector, regulator, actuatorManager, reporter, wifiModule);
     espManager->init();
@@ -90,8 +99,8 @@ SensorManager* createSensorModule(ESPConfig& config) {
     return new SensorManager(*tempSensor, *lightSensor, config.DETECTION_BUFFER_SIZE);
 }
 
-FireDetection* createFireDetectionModule(SensorManager* sensorManager, ESPConfig& config) {
-    return new FireDetection(sensorManager->getSensorDataProvider(), config.FIRE_TEMPERATURE_THRESHOLD,
+FireDetector* createFireDetectorModule(SensorManager* sensorManager, ESPConfig& config) {
+    return new FireDetector(*sensorManager, config.FIRE_TEMPERATURE_THRESHOLD,
                              config.FIRE_LIGHT_THRESHOLD);
 }
 
@@ -103,17 +112,24 @@ Reporter* createReportModule() { return new Reporter(); }
 
 WiFiModule* createWiFiModule(ESPConfig& config) { return new WiFiModule(config.NAME, config.SSID, config.PSSWD); }
 
-ESPServer* createServerModule(SensorManager* sensorManager, FireDetection* fireDetector,
-                              TemperatureRegulator* regulator, ActuatorManager* actuatorManager, Reporter* reporter,
-                              WiFiModule* wifiModule, ESPConfig& config) {
-    AsyncWebServer* asyncWebServer = new AsyncWebServer(config.PORT);
-    return new ESPServer(*asyncWebServer, sensorManager->getSensorDataProvider(), *fireDetector, *regulator,
-                         *actuatorManager, *reporter, *wifiModule);
-}
+EasyServer* createServer(ESPConfig& config) { return new EasyServer(config.PORT); }
 
-void createManager(ESPServer* server, SensorManager* sensorManager, FireDetection* fireDetector,
-                   TemperatureRegulator* regulator, ActuatorManager* actuatorManager, Reporter* reporter,
-                   WiFiModule* wifiModule) {
-    espManager =
-        new ESPManager(*server, *sensorManager, *fireDetector, *regulator, *actuatorManager, *reporter, *wifiModule);
+void createManager(
+    EasyServer* server,
+    SensorManager* sensorManager,
+    FireDetector* fireDetector,
+    TemperatureRegulator* regulator,
+    ActuatorManager* actuatorManager,
+    Reporter* reporter,
+    WiFiModule* wifiModule
+) {
+    espManager = new ESPManager(
+        *server, 
+        *sensorManager, 
+        *fireDetector, 
+        *regulator, 
+        *actuatorManager, 
+        *reporter, 
+        *wifiModule
+    );
 }
