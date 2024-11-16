@@ -135,7 +135,7 @@ String Reporter::preparerJsonPayload(
     repoterhost["sp"] = target_sp;
 
     // Piscine object
-    JsonObject piscine = json["pscine"].to<JsonObject>();
+    JsonObject piscine = json["piscine"].to<JsonObject>();
     piscine["hotspot"] = false;
     piscine["occuped"] = false;
 
