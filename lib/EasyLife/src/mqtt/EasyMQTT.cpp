@@ -1,5 +1,5 @@
 #include "EasyMQTT.h"
-
+#include "../inttypes.h"
 
 EasyMQTT::EasyMQTT(String mqttclientId, String mqttServerURL): 
     mqttclientId(mqttclientId),
@@ -13,6 +13,7 @@ void EasyMQTT::init() {
     WiFiClient *wifiClient = new WiFiClient();
     mqttClient.setClient(*wifiClient);
     mqttClient.setServer(mqttServerURL.c_str(), 1883);
+    logger.info("Mqtt is running on port: %d", 1883);
 }
 
 bool EasyMQTT::isConnected() {
@@ -23,7 +24,7 @@ void EasyMQTT::subscribe(String& topic, uint8_t qos) {
     while(!isConnected()) {
         logger.info("Attempting MQTT connection...");
         if (connect(mqttclientId)) {
-            logger.info("MQTT connected.");
+            logger.info("MQTT connected as %s.", mqttclientId.c_str());
 
             if(mqttClient.subscribe(topic.c_str(), qos)) {
                 logger.info("MQTT Subscribed to topic: %s", topic.c_str());
@@ -46,7 +47,7 @@ void EasyMQTT::publish(String& topic, JsonDocument& payload) {
     }
 
     if(mqttClient.publish(topic.c_str(), str.c_str())) {
-        logger.info("MQTT published to %s", topic.c_str());
+        logger.debug("MQTT published to %s", topic.c_str());
     } else {
         logger.error("MQTT DID NOT published to %s", topic.c_str());
     }
@@ -67,10 +68,13 @@ void EasyMQTT::publish(String& topic, String& payload) {
 }
 
 void EasyMQTT::setBufferSize(uint16_t size) {
+    // MARK: exploring this... PRIu16
+    logger.debug("new buffer size set at: %" PRIu16, size);
     mqttClient.setBufferSize(size);
 }
 
 void EasyMQTT::setMessageHandler(MessageHandler msgHandler) {
+    logger.debug("New callback set.");
      mqttClient.setCallback(msgHandler);
 }
 

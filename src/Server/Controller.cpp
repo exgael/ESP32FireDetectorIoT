@@ -40,14 +40,22 @@ Handler rootControllerHandler(
             { "PRT_T", [&]() { return String(reporter.getTargetSP()); } }
         };
 
-        // Send index.html file
-        res.sendFile("/index.html", [&](const String &var) {
+        /**
+         * @brief Helper used for the templatting.
+         * 
+         * @arg var: String passed corresponds to a queried value. 
+         * @return String: The queried value is returned as a String.
+         */
+        std::function<String(const String &)> processTemplate = [&](const String &var) {
             auto it = placeholderMap.find(var);
             while (it != placeholderMap.end()) {
                 return it->second();
             }
             return String();
-        });
+        };
+
+        // Send index.html file
+        res.sendFile("/index.html", processTemplate);
     };
 }
 
