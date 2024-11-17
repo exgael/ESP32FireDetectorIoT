@@ -86,12 +86,13 @@ void ESPManager::executeWorkflow()
         iter++;
         executingMainPipeline = false;
 
-        String payload = reporter.getPayload(
+        String payload = PayloadMaker::getCompleteStateString(
             sensorManager,
             fireDetector,
             regulator,
             actuatorManager,
-            wifiModule);
+            wifiModule,
+            reporter);
 
         mqttClient.publish(ESPConfig::sharedInstance().TOPIC_TEMP, payload);
         mqttClient.loop();

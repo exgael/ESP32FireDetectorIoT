@@ -9,6 +9,7 @@
 #include "SensorManager.h"
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
+#include "PayloadMaker.h"
 
 #include <ArduinoJson.h>
 #include <EasyLife.h>
@@ -18,17 +19,8 @@ class Reporter {
    public:
     Reporter();
 
-     
-
     // Reporter Setter
     void setNewReporting(String target_ip, int target_port, int target_sp);
-
-    String getPayload(    
-        const SensorManager &sensorData,
-        FireDetector &fireDetector,
-        TemperatureRegulator &regulator,
-        ActuatorManager &actuatorManager,
-        WiFiModule &wifiModule);
 
     // Reporting
     void handlePeriodicReporting(
@@ -66,12 +58,6 @@ class Reporter {
     bool isReporting();
     void send(HTTPClient &http, String &jsonString);
     String buildReportUrl();
-    String preparerJsonPayload(
-        const SensorManager &sensorData,
-        FireDetector &fireDetector,
-        TemperatureRegulator &regulator,
-        ActuatorManager &actuatorManager,
-        WiFiModule &wifiModule);
     void configureHTTTP(HTTPClient &http);
 
     Logger logger;

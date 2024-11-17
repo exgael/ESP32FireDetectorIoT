@@ -7,11 +7,12 @@
 #define USE_SERIAL Serial
 
 #include "ESPConfig.h"
-#include "FireDetector.h"
 #include "Reporter.h"
+#include "FireDetector.h"
 #include "SensorManager.h"
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
+#include "PayloadMaker.h"
 
 #include <Arduino.h>
 #include <ArduinoJson.h>

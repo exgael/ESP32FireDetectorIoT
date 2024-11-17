@@ -22,26 +22,26 @@ class WiFiModule {
     void init();
     void printStatus() const noexcept;
 
-    String getHostname()
+    String getHostname() const noexcept
     {
-        return hostname;
+        return hostname; 
     }
-    String getSSID()
+    String getSSID() const
     {
         return ssid;
     }
-    String getPassword()
+    String getPassword() const noexcept
     {
         return password;
-    }
-    String getMAC()
+    } 
+    String getMAC() const noexcept
     {
         return WiFi.macAddress();
     }
-    String getIP()
+    String getIP() const noexcept
     {
         return WiFi.localIP().toString();
-    }
+    } 
 
    private:
     String hostname;
