@@ -61,7 +61,7 @@ String PayloadMaker::getCompleteStateString(
     // Piscine object
     JsonObject piscine = json["piscine"].to<JsonObject>();
     piscine["hotspot"] = false;
-    piscine["occuped"] = false;
+    piscine["occuped"] = sensorData.getLuminosity() > 0 ? true : false;
 
     return getStringFromJson(json);
 }
