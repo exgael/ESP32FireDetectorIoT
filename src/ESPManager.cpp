@@ -14,6 +14,7 @@ ESPManager::ESPManager(
     SensorManager &sensorManager,
     FireDetector &fireDetector,
     TemperatureRegulator &regulator,
+    AmIHotspot& hotspot,
     ActuatorManager &actuatorManager,
     Reporter &reporter,
     WiFiModule &wifiModule)
@@ -22,6 +23,7 @@ ESPManager::ESPManager(
       sensorManager(sensorManager),
       fireDetector(fireDetector),
       regulator(regulator),
+      hotspot(hotspot),
       actuatorManager(actuatorManager),
       reporter(reporter),
       wifiModule(wifiModule),
@@ -52,7 +54,7 @@ void ESPManager::init()
 
     setupCallback(
         mqttClient, 
-        actuatorManager, 
+        hotspot,
         logger
     );
 
@@ -90,6 +92,7 @@ void ESPManager::executeWorkflow()
             sensorManager,
             fireDetector,
             regulator,
+            hotspot,
             actuatorManager,
             wifiModule,
             reporter);

@@ -2,14 +2,14 @@
 
 extern void setupCallback(
     EasyMQTT& client,
-    ActuatorManager& actuatorManager,
+    AmIHotspot& hotspot,
     Logger& logger) {
     client.setBufferSize(512);
-    client.setMessageHandler(mqttCallback(actuatorManager, logger));
+    client.setMessageHandler(mqttCallback(hotspot, logger));
 }
 
 extern MessageHandler mqttCallback(
-    ActuatorManager& actuatorManager,
+    AmIHotspot& hotspot,
     Logger& logger
 ) noexcept {
      // Callback when a message is published on a subscribed topic.
@@ -25,18 +25,56 @@ extern MessageHandler mqttCallback(
 
         logger.debug("=> %s", message.c_str());
 
-        // If a message is received on the LED topic, change the LED state accordingly
-        if (String(topic) == ESPConfig::sharedInstance().TOPIC_LED) {
+        // Parse JSON payload
+        JsonDocument doc;
+        DeserializationError error = deserializeJson(doc, message);
+        if (error) {
+            logger.error("Failed to parse JSON: %s", error.c_str());
+            return;
+        }
 
-            auto logMsg = "so ... changing output to %s";
+        if (String(topic) == ESPConfig::sharedInstance().TOPIC_TEMP) {
+            JsonDocument doc;
+            DeserializationError error = deserializeJson(doc, message);
 
-            if (message == "on") {
-                logger.debug(logMsg, "on");
-                actuatorManager.requestOnboardLedOn();
-            } else if (message == "off") {
-                logger.debug(logMsg, "off");
-                actuatorManager.requestOnboardLedOff();
+            if (error) {
+                logger.error("JSON parse error: %s", error.c_str());
+                return;
             }
+
+            // Extract the "piscine" object
+            JsonObject piscine = doc["piscine"];
+            if (piscine.isNull()) {
+                logger.error("Missing 'piscine' object in payload.");
+                return;
+            }
+
+            // Parse piscine fields
+            String ident = doc["info"]["ident"] | "";
+            bool hotspotFlag = piscine["hotspot"] | false;
+            bool occuped = piscine["occuped"] | false;
+            double lat = doc["location"]["gps"]["lat"] | 0.0;
+            double lon = doc["location"]["gps"]["lon"] | 0.0;
+            double temperature = doc["status"]["temperature"] | 0.0;
+
+            if (ident.isEmpty()) {
+                logger.error("Missing 'ident' in payload.");
+                return;
+            }
+
+            if (lat == 0.0 || lon == 0.0) {
+                 logger.error("Missing 'lat/lon' in message %s", message.c_str());
+                return;
+            }
+
+            // Log the parsed data
+            logger.debug("Parsed Piscine: ident=%s, temperature=%f, hotspot=%d, occuped=%d, lat=%f, lon=%f",
+                         ident.c_str(), temperature, hotspotFlag, occuped, lat, lon);
+
+            // Add to AmIHotspot
+            hotspot.add(ESPPoolStatus(ident, lat, lon, hotspotFlag, occuped, temperature));
+
+            logger.info("Added piscine with ident=%s to hotspot.", ident.c_str());
         }
     };
 }

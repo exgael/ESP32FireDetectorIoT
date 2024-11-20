@@ -232,9 +232,10 @@ void sendPeriodicReport(
     SensorManager &sensorManager,
     TemperatureRegulator &regulator,
     FireDetector &fireDetector,
+    AmIHotspot &hotspot, 
     WiFiModule &wifiModule,
     Reporter &reporter)
 {
     reporter.handlePeriodicReporting(
-        sensorManager, fireDetector, regulator, actuatorManager, wifiModule);
+        sensorManager, fireDetector, regulator, hotspot, actuatorManager, wifiModule);
 }

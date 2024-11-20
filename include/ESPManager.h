@@ -13,6 +13,7 @@
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
 #include "PayloadMaker.h"
+#include "HotSpot.h"
 
 #include <Arduino.h>
 #include <ArduinoJson.h>
@@ -28,6 +29,7 @@ class ESPManager {
         SensorManager &sensorManager,
         FireDetector &fireDetector,
         TemperatureRegulator &regulator,
+        AmIHotspot& hotspot,
         ActuatorManager &actuatorManager,
         Reporter &reporter,
         WiFiModule &wifiModule);
@@ -41,6 +43,7 @@ class ESPManager {
     SensorManager &sensorManager;
     FireDetector &fireDetector;
     TemperatureRegulator &regulator;
+    AmIHotspot& hotspot;
     ActuatorManager &actuatorManager;
     Reporter &reporter;
     WiFiModule &wifiModule;

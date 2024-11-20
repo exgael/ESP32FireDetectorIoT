@@ -5,6 +5,7 @@ String PayloadMaker::getCompleteStateString(
     const SensorManager &sensorData,
     const FireDetector &fireDetector,
     const TemperatureRegulator &regulator,
+    const AmIHotspot& hotspot,
     const ActuatorManager &actuatorManager,
     const WiFiModule &wifiModule,
     const Reporter &reporter
@@ -60,8 +61,8 @@ String PayloadMaker::getCompleteStateString(
 
     // Piscine object
     JsonObject piscine = json["piscine"].to<JsonObject>();
-    piscine["hotspot"] = false;
-    piscine["occuped"] = sensorData.getLuminosity() > 0 ? true : false;
+    piscine["hotspot"] = hotspot.isHotSpot(config.HOTSPOT_DETECTION_RADIUS);
+    piscine["occuped"] = sensorData.getLuminosity() < config.OCCUPATION_THRESHOLD ? true : false;
 
     return getStringFromJson(json);
 }

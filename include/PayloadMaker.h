@@ -8,6 +8,7 @@
 #include "SensorManager.h"
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
+#include "HotSpot.h"
 
 class Reporter;
 
@@ -22,6 +23,7 @@ class PayloadMaker {
             const SensorManager &sensorData,
             const FireDetector &fireDetector,
             const TemperatureRegulator &regulator,
+            const AmIHotspot& hotspot,
             const ActuatorManager &actuatorManager,
             const WiFiModule &wifiModule,
             const Reporter &reporter

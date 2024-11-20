@@ -24,6 +24,7 @@ void Reporter::handlePeriodicReporting(
     const SensorManager &sensorData,
     FireDetector &fireDetector,
     TemperatureRegulator &regulator,
+    AmIHotspot& hotspot,
     ActuatorManager &actuatorManager,
     WiFiModule &wifiModule)
 {
@@ -33,6 +34,7 @@ void Reporter::handlePeriodicReporting(
             sensorData, 
             fireDetector, 
             regulator, 
+            hotspot,
             actuatorManager, 
             wifiModule, 
             *this

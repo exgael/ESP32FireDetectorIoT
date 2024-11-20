@@ -101,6 +101,13 @@ class ESPConfig {
     int LOW_TEMP = 20;
     int HIGH_TEMP = 24;
 
+    ///////////////////////////
+    //    REGUL THRESHOLDS   //
+    ///////////////////////////
+
+    int OCCUPATION_THRESHOLD = 2000;
+    double HOTSPOT_DETECTION_RADIUS = 10;
+
    private:
     ESPConfig() = default;
     ESPConfig(const ESPConfig &) = delete;

@@ -11,3 +11,4 @@
 #include "server/index.h"
 #include "wifi/index.h"
 #include "mqtt/index.h"
+#include "Location/index.h"

@@ -10,6 +10,7 @@
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
 #include "PayloadMaker.h"
+#include "HotSpot.h"
 
 #include <ArduinoJson.h>
 #include <EasyLife.h>
@@ -27,6 +28,7 @@ class Reporter {
         const SensorManager &sensorData,
         FireDetector &fireDetector,
         TemperatureRegulator &regulator,
+        AmIHotspot& hotspot,
         ActuatorManager &actuatorManager,
         WiFiModule &wifiModule);
 

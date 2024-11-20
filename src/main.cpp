@@ -23,6 +23,8 @@ FireDetector *createFireDetectorModule(
 TemperatureRegulator *createRegulationModule(
     ActuatorManager *actuatorManager,
     ESPConfig &config);
+AmIHotspot * createHotspot(  SensorManager *sensorManager,
+    ESPConfig &config);
 Reporter *createReportModule();
 WiFiModule *createWiFiModule(ESPConfig &config);
 EasyServer *createServer(ESPConfig &config);
@@ -33,6 +35,7 @@ void createManager(
     SensorManager *sensorManager,
     FireDetector *fireDetector,
     TemperatureRegulator *regulator,
+    AmIHotspot*hotspot,
     ActuatorManager *actuatorManager,
     Reporter *reporter,
     WiFiModule *wifiModule);
@@ -61,6 +64,7 @@ void setup()
         createFireDetectorModule(sensorManager, config);
     TemperatureRegulator *regulator =
         createRegulationModule(actuatorManager, config);
+    AmIHotspot *hotspot = createHotspot(sensorManager, config);
     Reporter *reporter = createReportModule();
     EasyServer *server = createServer(config);
     EasyMQTT *mqttClient = createMQTTPubSub(config);
@@ -71,6 +75,7 @@ void setup()
         sensorManager,
         fireDetector,
         regulator,
+        hotspot,
         actuatorManager,
         reporter,
         wifiModule);
@@ -151,6 +156,11 @@ TemperatureRegulator *createRegulationModule(
         *actuatorManager, config.LOW_TEMP, config.HIGH_TEMP);
 }
 
+AmIHotspot *createHotspot( SensorManager *sensorManager,
+    ESPConfig &config) {
+        return new AmIHotspot(*sensorManager, config.LATITUDE, config.LONGITUDE);
+    }
+
 Reporter *createReportModule()
 {
     return new Reporter();
@@ -177,6 +187,7 @@ void createManager(
     SensorManager *sensorManager,
     FireDetector *fireDetector,
     TemperatureRegulator *regulator,
+        AmIHotspot*hotspot,
     ActuatorManager *actuatorManager,
     Reporter *reporter,
     WiFiModule *wifiModule)
@@ -187,6 +198,7 @@ void createManager(
         *sensorManager,
         *fireDetector,
         *regulator,
+       *hotspot,
         *actuatorManager,
         *reporter,
         *wifiModule);

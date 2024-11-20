@@ -4,10 +4,11 @@
 
 #include "../ActuatorManager.h"
 #include "../ESPConfig.h"
+#include "../HotSpot.h"
 
 extern void setupCallback(
     EasyMQTT& client,    
-    ActuatorManager& actuatorManager,
+    AmIHotspot& hotspot,
     Logger& logger
 );
 
@@ -15,6 +16,7 @@ extern void setupCallback(
  * @brief Returns a lambda callback for the mqtt message handler.
  */
 extern MessageHandler mqttCallback(
-    ActuatorManager& actuatorManager,
+    AmIHotspot& hotspot,
+
     Logger& logger
 ) noexcept;
