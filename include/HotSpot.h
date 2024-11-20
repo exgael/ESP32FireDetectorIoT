@@ -19,6 +19,8 @@ class ESPPoolStatus {
         bool occuped,
         double temperature);
 
+    String toString() const;
+
     String id;
     Location location;
     bool hotspot;
@@ -41,6 +43,8 @@ class AmIHotspot {
      * @return 1 if added, 2 if updated
      */
     int add(ESPPoolStatus &&other);
+
+    String toString() const;
 
    private:
     Location location;

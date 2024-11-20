@@ -39,7 +39,7 @@ class ESPConfig {
     ///////////////////////////
 
     int PORT = 80;
-    String USER = "Meeee";
+    String USER = "Benoit Barbier";
 
     ///////////////////////////
     //     MQTT SETTINGS     //
@@ -55,7 +55,7 @@ class ESPConfig {
 
     // Identification
     String NAME = "IoT - Device 001";
-    String IDENT = "Benoit Barbier";
+    String IDENT = "007 ~(^-^)~";
     String ROOM = "3C";
     String ADDRESS = "Les Lucioles";
     String LOC = "Biot";

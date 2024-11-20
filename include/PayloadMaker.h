@@ -27,6 +27,14 @@ class PayloadMaker {
         const WiFiModule &wifiModule,
         const Reporter &reporter);
 
+    /**
+     * @brief Resume all states of the ESP
+     * @return String: A string from Json.
+     */
+    static String getPiscineStateString(
+        const SensorManager &sensorData,
+        const AmIHotspot &hotspot);
+
    private:
     static String getStringFromJson(JsonDocument &doc);
 };

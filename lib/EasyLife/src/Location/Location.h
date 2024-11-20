@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ArduinoJson.h>
+
 class Location {
    public:
     Location(const Location &other);
@@ -13,6 +15,8 @@ class Location {
      * @brief uses Haversine.
      */
     double distance(const Location &) const;
+
+    String toString() const;
 
    private:
     /**

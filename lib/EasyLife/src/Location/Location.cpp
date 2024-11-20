@@ -19,3 +19,9 @@ double Location::distance(const Location &coor) const
     return 2 * EARTH_RADIUS_METERS *
         asin(sqrt(s1 * s1 + cos(latitude) * cos(coor.latitude) * s2 * s2));
 }
+
+String Location::toString() const
+{
+    return "(" + String(latitude * 180.0 / M_PI, 6) + ", " +
+        String(longitude * 180.0 / M_PI, 6) + ")";
+}

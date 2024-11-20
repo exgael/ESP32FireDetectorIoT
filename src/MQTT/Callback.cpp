@@ -18,7 +18,7 @@ extern MessageHandler mqttCallback(AmIHotspot &hotspot, Logger &logger) noexcept
             message += (char)payload[i];
         }
 
-        logger.debug("=> %s", message.c_str());
+        // logger.debug("=> %s", message.c_str());
 
         // Parse JSON payload
         JsonDocument doc;
@@ -70,15 +70,15 @@ extern MessageHandler mqttCallback(AmIHotspot &hotspot, Logger &logger) noexcept
                 return;
             }
 
-            logger.debug(
-                "Parsed Piscine: ident=%s, temperature=%f, hotspot=%d, "
-                "occuped=%d, lat=%f, lon=%f",
-                ident.c_str(),
-                temperature,
-                hotspotFlag,
-                occuped,
-                lat,
-                lon);
+            // logger.debug(
+            //     "Parsed Piscine: ident=%s, temperature=%f, hotspot=%d, "
+            //     "occuped=%d, lat=%f, lon=%f",
+            //     ident.c_str(),
+            //     temperature,
+            //     hotspotFlag,
+            //     occuped,
+            //     lat,
+            //     lon);
 
             // Add to list
             auto result = hotspot.add(ESPPoolStatus(

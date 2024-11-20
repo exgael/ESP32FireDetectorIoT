@@ -84,17 +84,15 @@ void ESPManager::executeWorkflow()
         iter++;
         executingMainPipeline = false;
 
-        String payload = PayloadMaker::getCompleteStateString(
-            sensorManager,
-            fireDetector,
-            regulator,
-            hotspot,
-            actuatorManager,
-            wifiModule,
-            reporter);
+        String payload =
+            PayloadMaker::getPiscineStateString(sensorManager, hotspot);
 
         mqttClient.publish(ESPConfig::sharedInstance().TOPIC_TEMP, payload);
         mqttClient.loop();
+
+        if (iter % 10 == 0) {
+            logger.debug(hotspot.toString().c_str());
+        }
     }
 
     // if (executingMainPipeline == false) { // Protecting

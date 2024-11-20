@@ -14,6 +14,22 @@ ESPPoolStatus::ESPPoolStatus(const ESPPoolStatus &other)
 {
 }
 
+String ESPPoolStatus::toString() const
+{
+    return "ID: " + this->id + " Loc: " + this->location.toString() +
+        " T: " + this->temperature + "C" + " Occuped: " + this->occuped +
+        " Hotspot" + this->hotspot;
+}
+
+String AmIHotspot::toString() const
+{
+    String str;
+    for (auto it = fleet.begin(); it != fleet.end(); ++it) {
+        str += it->second.toString() + "\n";
+    }
+    return str;
+}
+
 ESPPoolStatus::ESPPoolStatus(
     String id,
     double lat,
