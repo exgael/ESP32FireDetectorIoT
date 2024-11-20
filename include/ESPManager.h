@@ -49,7 +49,7 @@ class ESPManager {
     WiFiModule &wifiModule;
 
     unsigned long tick = 0;
-    unsigned long interval = 10000;
+    unsigned long interval = 1000;
     unsigned long iter = 0;
     bool executingMainPipeline = true;
     Logger logger;

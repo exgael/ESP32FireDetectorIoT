@@ -23,7 +23,7 @@ String ESPPoolStatus::toString() const
 
 String AmIHotspot::toString() const
 {
-    String str;
+    String str = "\n";
     for (auto it = fleet.begin(); it != fleet.end(); ++it) {
         str += it->second.toString() + "\n";
     }

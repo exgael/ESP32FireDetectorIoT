@@ -61,47 +61,43 @@ void ESPManager::init()
 
 void ESPManager::executeWorkflow()
 {
+    // Runs every time
     Clock::sharedInstance().update();
-
     mqttClient.subscribe(ESPConfig::sharedInstance().TOPIC_TEMP, 0);
 
+    // Intervaled
     if (Clock::sharedInstance().hasTimePassed(tick, interval)) {
-        executingMainPipeline = true;
-        logger.info("");
-        logger.info("*******  %lu  *******", iter);
-        logger.info("");
+        // Main
+        if (iter % 5 == 0) {
+            logger.info("");
+            logger.info("*******  %lu  *******", iter);
+            logger.info("");
 
+            sensorManager.updateReadings();
+            const bool isFireDetected = fireDetector.checkIfFireDetected();
+            regulator.regulate(sensorManager, isFireDetected);
+            actuatorManager.processCommands();
+
+            // Publish
+            String payload =
+                PayloadMaker::getPiscineStateString(sensorManager, hotspot);
+            mqttClient.publish(ESPConfig::sharedInstance().TOPIC_TEMP, payload);
+        }
+
+        // Wifi status
         if (iter % 10 == 0) {
             wifiModule.printStatus();
         }
 
-        sensorManager.updateReadings();
-        const bool isFireDetected = fireDetector.checkIfFireDetected();
-        regulator.regulate(sensorManager, isFireDetected);
-        actuatorManager.processCommands();
-
-        // Increment main pipeline iteration count
-        iter++;
-        executingMainPipeline = false;
-
-        String payload =
-            PayloadMaker::getPiscineStateString(sensorManager, hotspot);
-
-        mqttClient.publish(ESPConfig::sharedInstance().TOPIC_TEMP, payload);
+        // Process incoming msg
         mqttClient.loop();
 
-        if (iter % 10 == 0) {
+        // Log fleet
+        if (iter % 5 == 0) {
             logger.debug(hotspot.toString().c_str());
         }
-    }
 
-    // if (executingMainPipeline == false) { // Protecting
-    //     // Reporting
-    //     reporter.handlePeriodicReporting(
-    //         sensorManager,
-    //         fireDetector,
-    //         regulator,
-    //         actuatorManager,
-    //         wifiModule);
-    // }
+        // New iteration
+        ++iter;
+    }
 }

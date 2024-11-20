@@ -18,8 +18,6 @@ extern MessageHandler mqttCallback(AmIHotspot &hotspot, Logger &logger) noexcept
             message += (char)payload[i];
         }
 
-        // logger.debug("=> %s", message.c_str());
-
         // Parse JSON payload
         JsonDocument doc;
         DeserializationError error = deserializeJson(doc, message);
@@ -37,20 +35,13 @@ extern MessageHandler mqttCallback(AmIHotspot &hotspot, Logger &logger) noexcept
                 return;
             }
 
-            // Extract the "piscine" object
-            JsonObject piscine = doc["piscine"];
-            if (piscine.isNull()) {
-                logger.error("Missing 'piscine' object in payload.");
-                return;
-            }
-
             // Parse piscine fields
             String ident = doc["info"]["ident"] | "";
-            bool hotspotFlag = piscine["hotspot"] | false;
-            bool occuped = piscine["occuped"] | false;
-            double lat = doc["location"]["gps"]["lat"] | 0.0;
-            double lon = doc["location"]["gps"]["lon"] | 0.0;
-            double temperature = doc["status"]["temperature"] | 0.0;
+            bool hotspotFlag = false;
+            bool occuped = false;
+            double lat = 0.0;
+            double lon = 0.0;
+            double temperature = 0.0;
 
             // Check ident
             if (ident.isEmpty()) {
@@ -58,27 +49,86 @@ extern MessageHandler mqttCallback(AmIHotspot &hotspot, Logger &logger) noexcept
                 return;
             }
 
-            if (ident == ESPConfig::sharedInstance().IDENT) {
-                logger.debug("Not adding self to list.");
+            ////////////////////
+            //    Piscine     //
+            ////////////////////
+
+            // Extract the "piscine" object
+            JsonObject piscine = doc["piscine"];
+            if (piscine.isNull()) {
+                logger.error("Missing 'piscine' object in payload.");
                 return;
             }
+
+            // Validate "piscine" object
+            if (!doc.containsKey("piscine")) {
+                logger.error(
+                    "Missing 'piscine' in payload. Ident: %s", ident.c_str());
+                return;
+            }
+
+            // Extract piscine fields
+            hotspotFlag = piscine["hotspot"] | false;
+            occuped = piscine["occuped"] | false;
+
+            /////////////////////
+            //    Location     //
+            /////////////////////
+
+            // Validate location fields
+            if (!doc.containsKey("location") ||
+                !doc["location"].containsKey("gps")) {
+                logger.error(
+                    "Missing 'location.gps' in payload. Ident: %s",
+                    ident.c_str());
+                return;
+            }
+
+            lat = doc["location"]["gps"]["lat"] | 0.0;
+            lon = doc["location"]["gps"]["lon"] | 0.0;
 
             // Check location
             if (lat == 0.0 || lon == 0.0) {
                 logger.error(
-                    "Missing 'lat/lon' in message %s", message.c_str());
+                    "Invalid or missing 'lat/lon' in payload. Ident: %s. "
+                    "Message: %s",
+                    ident.c_str(),
+                    message.c_str());
                 return;
             }
 
-            // logger.debug(
-            //     "Parsed Piscine: ident=%s, temperature=%f, hotspot=%d, "
-            //     "occuped=%d, lat=%f, lon=%f",
-            //     ident.c_str(),
-            //     temperature,
-            //     hotspotFlag,
-            //     occuped,
-            //     lat,
-            //     lon);
+            /////////////////////
+            //     Status      //
+            /////////////////////
+
+            // Validate status fields
+            if (!doc.containsKey("status") ||
+                !doc["status"].containsKey("temperature")) {
+                logger.error(
+                    "Missing 'status.temperature' in payload. Ident: %s",
+                    ident.c_str());
+                return;
+            }
+
+            temperature = doc["status"]["temperature"] | 0.0;
+
+            /////////////////////
+            //     Parsed      //
+            /////////////////////
+
+            logger.debug(
+                "Payload parsed successfully. Ident: %s", ident.c_str());
+
+            // Check if the ident matches the ESP's own ident
+            if (ident == ESPConfig::sharedInstance().IDENT) {
+                logger.debug(
+                    "Not adding self to list. Ident: %s", ident.c_str());
+                return;
+            }
+
+            /////////////////////
+            //     Adding      //
+            /////////////////////
 
             // Add to list
             auto result = hotspot.add(ESPPoolStatus(
