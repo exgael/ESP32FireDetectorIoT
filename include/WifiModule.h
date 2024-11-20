@@ -24,7 +24,7 @@ class WiFiModule {
 
     String getHostname() const noexcept
     {
-        return hostname; 
+        return hostname;
     }
     String getSSID() const
     {
@@ -33,7 +33,7 @@ class WiFiModule {
     String getPassword() const noexcept
     {
         return password;
-    } 
+    }
     String getMAC() const noexcept
     {
         return WiFi.macAddress();
@@ -41,7 +41,7 @@ class WiFiModule {
     String getIP() const noexcept
     {
         return WiFi.localIP().toString();
-    } 
+    }
 
    private:
     String hostname;

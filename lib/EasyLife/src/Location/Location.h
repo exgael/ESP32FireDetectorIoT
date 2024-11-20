@@ -1,10 +1,9 @@
 #pragma once
 
 class Location {
+   public:
+    Location(const Location &other);
 
-    public:
-    Location(const Location& other);
-    
     /**
      * @brief Stores lattitude and longitude
      */
@@ -13,9 +12,9 @@ class Location {
     /**
      * @brief uses Haversine.
      */
-    double distance(const Location&) const;
+    double distance(const Location &) const;
 
-    private:
+   private:
     /**
      * @brief Latitude in rad
      */

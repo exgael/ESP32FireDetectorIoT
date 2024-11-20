@@ -6,11 +6,11 @@
 
 #include "ESPConfig.h"
 #include "FireDetector.h"
+#include "HotSpot.h"
+#include "PayloadMaker.h"
 #include "SensorManager.h"
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
-#include "PayloadMaker.h"
-#include "HotSpot.h"
 
 #include <ArduinoJson.h>
 #include <EasyLife.h>
@@ -28,7 +28,7 @@ class Reporter {
         const SensorManager &sensorData,
         FireDetector &fireDetector,
         TemperatureRegulator &regulator,
-        AmIHotspot& hotspot,
+        AmIHotspot &hotspot,
         ActuatorManager &actuatorManager,
         WiFiModule &wifiModule);
 

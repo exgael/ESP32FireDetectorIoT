@@ -7,13 +7,13 @@
 #define USE_SERIAL Serial
 
 #include "ESPConfig.h"
-#include "Reporter.h"
 #include "FireDetector.h"
+#include "HotSpot.h"
+#include "PayloadMaker.h"
+#include "Reporter.h"
 #include "SensorManager.h"
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
-#include "PayloadMaker.h"
-#include "HotSpot.h"
 
 #include <Arduino.h>
 #include <ArduinoJson.h>
@@ -29,7 +29,7 @@ class ESPManager {
         SensorManager &sensorManager,
         FireDetector &fireDetector,
         TemperatureRegulator &regulator,
-        AmIHotspot& hotspot,
+        AmIHotspot &hotspot,
         ActuatorManager &actuatorManager,
         Reporter &reporter,
         WiFiModule &wifiModule);
@@ -43,7 +43,7 @@ class ESPManager {
     SensorManager &sensorManager;
     FireDetector &fireDetector;
     TemperatureRegulator &regulator;
-    AmIHotspot& hotspot;
+    AmIHotspot &hotspot;
     ActuatorManager &actuatorManager;
     Reporter &reporter;
     WiFiModule &wifiModule;

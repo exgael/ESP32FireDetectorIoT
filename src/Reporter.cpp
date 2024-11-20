@@ -24,21 +24,19 @@ void Reporter::handlePeriodicReporting(
     const SensorManager &sensorData,
     FireDetector &fireDetector,
     TemperatureRegulator &regulator,
-    AmIHotspot& hotspot,
+    AmIHotspot &hotspot,
     ActuatorManager &actuatorManager,
     WiFiModule &wifiModule)
 {
     if (isReporting() && clock.hasTimePassed(tick, target_sp * 1000)) {
-        
         String jsonString = PayloadMaker::getCompleteStateString(
-            sensorData, 
-            fireDetector, 
-            regulator, 
+            sensorData,
+            fireDetector,
+            regulator,
             hotspot,
-            actuatorManager, 
-            wifiModule, 
-            *this
-        );
+            actuatorManager,
+            wifiModule,
+            *this);
 
         logger.debug(jsonString.c_str());
         HTTPClient http;

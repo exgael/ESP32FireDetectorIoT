@@ -1,20 +1,36 @@
 #include "HotSpot.h"
 
-AmIHotspot::AmIHotspot(SensorManager& sensorManager, double lat, double lon)
+AmIHotspot::AmIHotspot(SensorManager &sensorManager, double lat, double lon)
     : sensorManager(sensorManager), location(lat, lon)
 {
 }
 
-ESPPoolStatus::ESPPoolStatus(const ESPPoolStatus& other)
-    : id(other.id), location(other.location), hotspot(other.hotspot), occuped(other.occuped), temperature(other.temperature)
+ESPPoolStatus::ESPPoolStatus(const ESPPoolStatus &other)
+    : id(other.id),
+      location(other.location),
+      hotspot(other.hotspot),
+      occuped(other.occuped),
+      temperature(other.temperature)
 {
 }
 
-ESPPoolStatus::ESPPoolStatus(String id, double lat, double lon, bool hotspot, bool occuped, double temperature) : 
-    id(id), location(lat, lon), hotspot(hotspot), occuped(occuped), temperature(temperature)
-{}
+ESPPoolStatus::ESPPoolStatus(
+    String id,
+    double lat,
+    double lon,
+    bool hotspot,
+    bool occuped,
+    double temperature)
+    : id(id),
+      location(lat, lon),
+      hotspot(hotspot),
+      occuped(occuped),
+      temperature(temperature)
+{
+}
 
-void AmIHotspot::add(ESPPoolStatus&& other) {
+void AmIHotspot::add(ESPPoolStatus &&other)
+{
     auto it = fleet.find(other.id);
     if (it != fleet.end()) {
         // Update entry
@@ -25,7 +41,8 @@ void AmIHotspot::add(ESPPoolStatus&& other) {
     }
 }
 
-bool AmIHotspot::isHotSpot(double radius) const {
+bool AmIHotspot::isHotSpot(double radius) const
+{
     for (auto it = fleet.begin(); it != fleet.end(); ++it) {
         if (it->second.temperature > sensorManager.getTemperature() &&
             location.distance(it->second.location) <= radius) {
@@ -34,5 +51,3 @@ bool AmIHotspot::isHotSpot(double radius) const {
     }
     return true;
 }
-
-

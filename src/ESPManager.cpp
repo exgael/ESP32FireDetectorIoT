@@ -3,8 +3,8 @@
  */
 
 #include "ESPManager.h"
-#include "Server/Route.h"
 #include "MQTT/Callback.h"
+#include "Server/Route.h"
 
 #include <map>
 
@@ -14,7 +14,7 @@ ESPManager::ESPManager(
     SensorManager &sensorManager,
     FireDetector &fireDetector,
     TemperatureRegulator &regulator,
-    AmIHotspot& hotspot,
+    AmIHotspot &hotspot,
     ActuatorManager &actuatorManager,
     Reporter &reporter,
     WiFiModule &wifiModule)
@@ -52,11 +52,7 @@ void ESPManager::init()
         reporter,
         logger);
 
-    setupCallback(
-        mqttClient, 
-        hotspot,
-        logger
-    );
+    setupCallback(mqttClient, hotspot, logger);
 
     logger.info("");
     logger.info("******* ESP Ready *******");

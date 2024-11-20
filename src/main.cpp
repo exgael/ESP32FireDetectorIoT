@@ -23,8 +23,7 @@ FireDetector *createFireDetectorModule(
 TemperatureRegulator *createRegulationModule(
     ActuatorManager *actuatorManager,
     ESPConfig &config);
-AmIHotspot * createHotspot(  SensorManager *sensorManager,
-    ESPConfig &config);
+AmIHotspot *createHotspot(SensorManager *sensorManager, ESPConfig &config);
 Reporter *createReportModule();
 WiFiModule *createWiFiModule(ESPConfig &config);
 EasyServer *createServer(ESPConfig &config);
@@ -35,7 +34,7 @@ void createManager(
     SensorManager *sensorManager,
     FireDetector *fireDetector,
     TemperatureRegulator *regulator,
-    AmIHotspot*hotspot,
+    AmIHotspot *hotspot,
     ActuatorManager *actuatorManager,
     Reporter *reporter,
     WiFiModule *wifiModule);
@@ -156,10 +155,10 @@ TemperatureRegulator *createRegulationModule(
         *actuatorManager, config.LOW_TEMP, config.HIGH_TEMP);
 }
 
-AmIHotspot *createHotspot( SensorManager *sensorManager,
-    ESPConfig &config) {
-        return new AmIHotspot(*sensorManager, config.LATITUDE, config.LONGITUDE);
-    }
+AmIHotspot *createHotspot(SensorManager *sensorManager, ESPConfig &config)
+{
+    return new AmIHotspot(*sensorManager, config.LATITUDE, config.LONGITUDE);
+}
 
 Reporter *createReportModule()
 {
@@ -176,7 +175,7 @@ EasyServer *createServer(ESPConfig &config)
     return new EasyServer(config.PORT);
 }
 
-EasyMQTT *createMQTTPubSub(ESPConfig &config) 
+EasyMQTT *createMQTTPubSub(ESPConfig &config)
 {
     return new EasyMQTT(config.IDENT, config.MQTT_SERVER);
 }
@@ -187,7 +186,7 @@ void createManager(
     SensorManager *sensorManager,
     FireDetector *fireDetector,
     TemperatureRegulator *regulator,
-        AmIHotspot*hotspot,
+    AmIHotspot *hotspot,
     ActuatorManager *actuatorManager,
     Reporter *reporter,
     WiFiModule *wifiModule)
@@ -198,7 +197,7 @@ void createManager(
         *sensorManager,
         *fireDetector,
         *regulator,
-       *hotspot,
+        *hotspot,
         *actuatorManager,
         *reporter,
         *wifiModule);

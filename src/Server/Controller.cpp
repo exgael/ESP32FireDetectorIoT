@@ -42,17 +42,18 @@ Handler rootControllerHandler(
 
         /**
          * @brief Helper used for the templatting.
-         * 
-         * @arg var: String passed corresponds to a queried value. 
+         *
+         * @arg var: String passed corresponds to a queried value.
          * @return String: The queried value is returned as a String.
          */
-        std::function<String(const String &)> processTemplate = [&](const String &var) {
-            auto it = placeholderMap.find(var);
-            while (it != placeholderMap.end()) {
-                return it->second();
-            }
-            return String();
-        };
+        std::function<String(const String &)> processTemplate =
+            [&](const String &var) {
+                auto it = placeholderMap.find(var);
+                while (it != placeholderMap.end()) {
+                    return it->second();
+                }
+                return String();
+            };
 
         // Send index.html file
         res.sendFile("/index.html", processTemplate);
@@ -232,10 +233,15 @@ void sendPeriodicReport(
     SensorManager &sensorManager,
     TemperatureRegulator &regulator,
     FireDetector &fireDetector,
-    AmIHotspot &hotspot, 
+    AmIHotspot &hotspot,
     WiFiModule &wifiModule,
     Reporter &reporter)
 {
     reporter.handlePeriodicReporting(
-        sensorManager, fireDetector, regulator, hotspot, actuatorManager, wifiModule);
+        sensorManager,
+        fireDetector,
+        regulator,
+        hotspot,
+        actuatorManager,
+        wifiModule);
 }
