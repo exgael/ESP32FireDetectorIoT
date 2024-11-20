@@ -29,15 +29,17 @@ ESPPoolStatus::ESPPoolStatus(
 {
 }
 
-void AmIHotspot::add(ESPPoolStatus &&other)
+int AmIHotspot::add(ESPPoolStatus &&other)
 {
     auto it = fleet.find(other.id);
     if (it != fleet.end()) {
         // Update entry
         it->second = std::move(other);
+        return 2;
     } else {
         // Create entry
         fleet.emplace(other.id, std::move(other));
+        return 1;
     }
 }
 

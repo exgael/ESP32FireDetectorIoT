@@ -52,18 +52,24 @@ extern MessageHandler mqttCallback(AmIHotspot &hotspot, Logger &logger) noexcept
             double lon = doc["location"]["gps"]["lon"] | 0.0;
             double temperature = doc["status"]["temperature"] | 0.0;
 
+            // Check ident
             if (ident.isEmpty()) {
                 logger.error("Missing 'ident' in payload.");
                 return;
             }
 
+            if (ident == ESPConfig::sharedInstance().IDENT) {
+                logger.debug("Not adding self to list.");
+                return;
+            }
+
+            // Check location
             if (lat == 0.0 || lon == 0.0) {
                 logger.error(
                     "Missing 'lat/lon' in message %s", message.c_str());
                 return;
             }
 
-            // Log the parsed data
             logger.debug(
                 "Parsed Piscine: ident=%s, temperature=%f, hotspot=%d, "
                 "occuped=%d, lat=%f, lon=%f",
@@ -74,12 +80,19 @@ extern MessageHandler mqttCallback(AmIHotspot &hotspot, Logger &logger) noexcept
                 lat,
                 lon);
 
-            // Add to AmIHotspot
-            hotspot.add(ESPPoolStatus(
+            // Add to list
+            auto result = hotspot.add(ESPPoolStatus(
                 ident, lat, lon, hotspotFlag, occuped, temperature));
 
-            logger.info(
-                "Added piscine with ident=%s to hotspot.", ident.c_str());
+            if (result == 1) {
+                logger.info(
+                    "Added device status with ident=%s to hotspot.",
+                    ident.c_str());
+            } else if (result == 2) {
+                logger.info(
+                    "Updated device status with ident=%s to hotspot.",
+                    ident.c_str());
+            }
         }
     };
 }

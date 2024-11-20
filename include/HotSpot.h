@@ -37,8 +37,10 @@ class AmIHotspot {
 
     /**
      * @brief Add an esppoolstatus.
+     *
+     * @return 1 if added, 2 if updated
      */
-    void add(ESPPoolStatus &&other);
+    int add(ESPPoolStatus &&other);
 
    private:
     Location location;
