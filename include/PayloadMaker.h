@@ -10,23 +10,8 @@
 
 #include <ArduinoJson.h>
 
-class Reporter;
-
 class PayloadMaker {
    public:
-    /**
-     * @brief Resume all states of the ESP
-     * @return String: A string from Json.
-     */
-    static String getCompleteStateString(
-        const SensorManager &sensorData,
-        const FireDetector &fireDetector,
-        const TemperatureRegulator &regulator,
-        const AmIHotspot &hotspot,
-        const ActuatorManager &actuatorManager,
-        const WiFiModule &wifiModule,
-        const Reporter &reporter);
-
     /**
      * @brief Resume all states of the ESP
      * @return String: A string from Json.

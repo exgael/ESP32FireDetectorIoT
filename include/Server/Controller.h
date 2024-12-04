@@ -2,7 +2,6 @@
 
 #include "ESPConfig.h"
 #include "FireDetector.h"
-#include "Reporter.h"
 #include "SensorManager.h"
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
@@ -22,8 +21,7 @@ extern Handler rootControllerHandler(
     SensorManager &sensorManager,
     TemperatureRegulator &regulator,
     FireDetector &fireDetector,
-    WiFiModule &wifiModule,
-    Reporter &reporter) noexcept;
+    WiFiModule &wifiModule) noexcept;
 
 /////////////////////////////
 //          FETCH          //
@@ -49,14 +47,3 @@ extern Handler setValuesControllerHandler(
     SensorManager &sensorManager,
     TemperatureRegulator &regulator,
     FireDetector &fireDetector);
-
-/////////////////////////////
-//          REPORT         //
-/////////////////////////////
-
-/**
- * @brief Handle the reporting definition.
- */
-extern Handler setReportControllerHandler(
-    Reporter &reporter,
-    Logger &logger) noexcept;

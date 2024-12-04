@@ -9,8 +9,7 @@ Handler rootControllerHandler(
     SensorManager &sensorManager,
     TemperatureRegulator &regulator,
     FireDetector &fireDetector,
-    WiFiModule &wifiModule,
-    Reporter &reporter) noexcept
+    WiFiModule &wifiModule) noexcept
 {
     return [&](Request &req, Response &res) {
         std::map<String, std::function<String()>> placeholderMap = {
@@ -34,10 +33,7 @@ Handler rootControllerHandler(
               [&]() { return String(fireDetector.getTempThreshold()); } },
             { "FLT", [&]() { return String(fireDetector.getLumThreshold()); } },
             { "LT", [&]() { return String(regulator.getLowThreshold()); } },
-            { "HT", [&]() { return String(regulator.getHighThreshold()); } },
-            { "PRT_IP", [&]() { return reporter.getTargetIP(); } },
-            { "PRT_PORT", [&]() { return String(reporter.getTargetPort()); } },
-            { "PRT_T", [&]() { return String(reporter.getTargetSP()); } }
+            { "HT", [&]() { return String(regulator.getHighThreshold()); } }
         };
 
         /**
@@ -199,49 +195,4 @@ Handler setValuesControllerHandler(
         // Send confirmation response
         res.send(200);
     };
-}
-
-/////////////////////////////
-//          REPORT         //
-/////////////////////////////
-
-Handler setReportControllerHandler(Reporter &reporter, Logger &logger) noexcept
-{
-    return [&](Request &req, Response &res) {
-        // Retrieve and parse target parameters
-        String target_ip = req.getBodyParamValue("ip");
-        int target_port_int = req.getBodyParamValue("port").toInt();
-        int target_sp_int = req.getBodyParamValue("sp").toInt();
-
-        // Set the new reporting configuration
-        reporter.setNewReporting(target_ip, target_port_int, target_sp_int);
-
-        // Log the new configuration
-        logger.info(
-            "Target set to IP: %s, Port: %d, Sampling Period: %d",
-            target_ip.c_str(),
-            target_port_int,
-            target_sp_int);
-
-        // Send confirmation response
-        res.send(200);
-    };
-}
-
-void sendPeriodicReport(
-    ActuatorManager &actuatorManager,
-    SensorManager &sensorManager,
-    TemperatureRegulator &regulator,
-    FireDetector &fireDetector,
-    AmIHotspot &hotspot,
-    WiFiModule &wifiModule,
-    Reporter &reporter)
-{
-    reporter.handlePeriodicReporting(
-        sensorManager,
-        fireDetector,
-        regulator,
-        hotspot,
-        actuatorManager,
-        wifiModule);
 }

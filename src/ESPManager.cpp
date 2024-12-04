@@ -16,7 +16,6 @@ ESPManager::ESPManager(
     TemperatureRegulator &regulator,
     AmIHotspot &hotspot,
     ActuatorManager &actuatorManager,
-    Reporter &reporter,
     WiFiModule &wifiModule)
     : server(server),
       mqttClient(mqttClient),
@@ -25,7 +24,6 @@ ESPManager::ESPManager(
       regulator(regulator),
       hotspot(hotspot),
       actuatorManager(actuatorManager),
-      reporter(reporter),
       wifiModule(wifiModule),
       logger("ESPManager")
 {
@@ -49,7 +47,6 @@ void ESPManager::init()
         regulator,
         fireDetector,
         wifiModule,
-        reporter,
         logger);
 
     setupCallback(mqttClient, hotspot, logger);
@@ -92,7 +89,7 @@ void ESPManager::executeWorkflow()
         // Process incoming msg
         mqttClient.loop();
 
-        // Log fleet
+        // Log HotSpot Status
         if (iter % 5 == 0) {
             logger.debug(hotspot.toString().c_str());
         }

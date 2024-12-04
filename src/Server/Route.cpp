@@ -8,7 +8,6 @@ void setupRouteHandlers(
     TemperatureRegulator &regulator,
     FireDetector &fireDetector,
     WiFiModule &wifiModule,
-    Reporter &reporter,
     Logger &logger) noexcept
 {
     server.use(logHTTPMethod(logger));
@@ -24,8 +23,7 @@ void setupRouteHandlers(
             sensorManager,
             regulator,
             fireDetector,
-            wifiModule,
-            reporter));
+            wifiModule));
 
     server.get(
         "/value",
@@ -41,13 +39,6 @@ void setupRouteHandlers(
         // Handler
         setValuesControllerHandler(
             actuatorManager, sensorManager, regulator, fireDetector));
-
-    server.post(
-        "/target",
-        { // Middlewares
-          reportRequestValidationHandler() },
-        // Handler
-        setReportControllerHandler(reporter, logger));
 
     server.onNotFound([&logger](Request &req, Response &res) {
         logger.warn("http request gave 404.");

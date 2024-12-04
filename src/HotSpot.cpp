@@ -23,11 +23,12 @@ String ESPPoolStatus::toString() const
 
 String AmIHotspot::toString() const
 {
-    String str = "\n";
-    for (auto it = fleet.begin(); it != fleet.end(); ++it) {
-        str += it->second.toString() + "\n";
+    String newline = "\n";
+
+    if (this->lastNearHotspot == nullptr) {
+        return newline;
     }
-    return str;
+    return lastNearHotspot->toString() + newline;;
 }
 
 ESPPoolStatus::ESPPoolStatus(
@@ -47,25 +48,24 @@ ESPPoolStatus::ESPPoolStatus(
 
 int AmIHotspot::add(ESPPoolStatus &&other)
 {
-    auto it = fleet.find(other.id);
-    if (it != fleet.end()) {
-        // Update entry
-        it->second = std::move(other);
-        return 2;
-    } else {
-        // Create entry
-        fleet.emplace(other.id, std::move(other));
-        return 1;
+    if (other.location.distance(this->location) <= 10) {
+        // Self is hotspot
+        if (this->lastNearHotspot == nullptr && other.temperature > this->sensorManager.getTemperature()) {
+            this->lastNearHotspot = &other;
+            return 2;
+        }
+
+        // Self is not hotspot
+        if (this->lastNearHotspot->temperature < other.temperature) {
+            lastNearHotspot = &other;
+            return 2;
+        }
     }
+
+    return 1;
 }
 
 bool AmIHotspot::isHotSpot(double radius) const
 {
-    for (auto it = fleet.begin(); it != fleet.end(); ++it) {
-        if (it->second.temperature > sensorManager.getTemperature() &&
-            location.distance(it->second.location) <= radius) {
-            return false;
-        }
-    }
-    return true;
+    return this->lastNearHotspot == nullptr;
 }

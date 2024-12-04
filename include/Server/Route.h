@@ -13,5 +13,4 @@ void setupRouteHandlers(
     TemperatureRegulator &regulator,
     FireDetector &fireDetector,
     WiFiModule &wifiModule,
-    Reporter &reporter,
     Logger &logger) noexcept;

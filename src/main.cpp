@@ -24,7 +24,6 @@ TemperatureRegulator *createRegulationModule(
     ActuatorManager *actuatorManager,
     ESPConfig &config);
 AmIHotspot *createHotspot(SensorManager *sensorManager, ESPConfig &config);
-Reporter *createReportModule();
 WiFiModule *createWiFiModule(ESPConfig &config);
 EasyServer *createServer(ESPConfig &config);
 EasyMQTT *createMQTTPubSub(ESPConfig &config);
@@ -36,7 +35,6 @@ void createManager(
     TemperatureRegulator *regulator,
     AmIHotspot *hotspot,
     ActuatorManager *actuatorManager,
-    Reporter *reporter,
     WiFiModule *wifiModule);
 
 ///////////////////////////////
@@ -64,7 +62,6 @@ void setup()
     TemperatureRegulator *regulator =
         createRegulationModule(actuatorManager, config);
     AmIHotspot *hotspot = createHotspot(sensorManager, config);
-    Reporter *reporter = createReportModule();
     EasyServer *server = createServer(config);
     EasyMQTT *mqttClient = createMQTTPubSub(config);
 
@@ -76,7 +73,6 @@ void setup()
         regulator,
         hotspot,
         actuatorManager,
-        reporter,
         wifiModule);
     espManager->init();
 }
@@ -160,11 +156,6 @@ AmIHotspot *createHotspot(SensorManager *sensorManager, ESPConfig &config)
     return new AmIHotspot(*sensorManager, config.LATITUDE, config.LONGITUDE);
 }
 
-Reporter *createReportModule()
-{
-    return new Reporter();
-}
-
 WiFiModule *createWiFiModule(ESPConfig &config)
 {
     return new WiFiModule(config.NAME, config.SSID, config.PSSWD);
@@ -188,7 +179,6 @@ void createManager(
     TemperatureRegulator *regulator,
     AmIHotspot *hotspot,
     ActuatorManager *actuatorManager,
-    Reporter *reporter,
     WiFiModule *wifiModule)
 {
     espManager = new ESPManager(
@@ -199,6 +189,5 @@ void createManager(
         *regulator,
         *hotspot,
         *actuatorManager,
-        *reporter,
         *wifiModule);
 }

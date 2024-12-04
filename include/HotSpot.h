@@ -40,7 +40,7 @@ class AmIHotspot {
     /**
      * @brief Add an esppoolstatus.
      *
-     * @return 1 if added, 2 if updated
+     * @return 1 if no change, 2 if updated
      */
     int add(ESPPoolStatus &&other);
 
@@ -51,7 +51,7 @@ class AmIHotspot {
     SensorManager &sensorManager;
 
     /**
-     * @brief This map an Identification to it values
+     * @brief Last status of a near hotspot
      */
-    std::map<String, ESPPoolStatus> fleet;
+    ESPPoolStatus* lastNearHotspot = nullptr;
 };

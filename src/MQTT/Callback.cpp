@@ -136,7 +136,7 @@ extern MessageHandler mqttCallback(AmIHotspot &hotspot, Logger &logger) noexcept
 
             if (result == 1) {
                 logger.info(
-                    "Added device status with ident=%s to hotspot.",
+                    "Device status with ident=%s is not hotspot.",
                     ident.c_str());
             } else if (result == 2) {
                 logger.info(

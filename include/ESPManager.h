@@ -10,7 +10,6 @@
 #include "FireDetector.h"
 #include "HotSpot.h"
 #include "PayloadMaker.h"
-#include "Reporter.h"
 #include "SensorManager.h"
 #include "TemperatureRegulator.h"
 #include "WiFiModule.h"
@@ -31,7 +30,6 @@ class ESPManager {
         TemperatureRegulator &regulator,
         AmIHotspot &hotspot,
         ActuatorManager &actuatorManager,
-        Reporter &reporter,
         WiFiModule &wifiModule);
 
     void init();
@@ -45,7 +43,6 @@ class ESPManager {
     TemperatureRegulator &regulator;
     AmIHotspot &hotspot;
     ActuatorManager &actuatorManager;
-    Reporter &reporter;
     WiFiModule &wifiModule;
 
     unsigned long tick = 0;
