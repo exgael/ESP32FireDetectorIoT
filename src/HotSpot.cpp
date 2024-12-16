@@ -60,6 +60,14 @@ int Hotspot::add(ESPPoolStatus &&other)
             lastNearHotspot = &other;
             return 2;
         }
+
+        // Self by default
+        if (this->lastNearHotspot != nullptr) {
+            if (this->lastNearHotspot->temperature < this->sensorManager.getTemperature()) {
+                lastNearHotspot = nullptr;
+                return 2;
+            }
+        }
     }
 
     return 1;
