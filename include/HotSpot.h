@@ -28,14 +28,14 @@ class ESPPoolStatus {
     double temperature;
 };
 
-class AmIHotspot {
+class Hotspot {
    public:
-    AmIHotspot(SensorManager &sensorManager, double lat, double lon);
+    Hotspot(SensorManager &sensorManager, double lat, double lon);
 
     /**
      * @Brief return whether it is an hotspot in a radius (km).
      */
-    bool isHotSpot(double radius) const;
+    bool isHotspot() const;
 
     /**
      * @brief Add an esppoolstatus.

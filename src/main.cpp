@@ -17,13 +17,7 @@ void createLogger();
 ESPConfig &getConfig();
 ActuatorManager *createControlModule(ESPConfig &config);
 SensorManager *createSensorModule(ESPConfig &config);
-FireDetector *createFireDetectorModule(
-    SensorManager *sensorManager,
-    ESPConfig &config);
-TemperatureRegulator *createRegulationModule(
-    ActuatorManager *actuatorManager,
-    ESPConfig &config);
-AmIHotspot *createHotspot(SensorManager *sensorManager, ESPConfig &config);
+Hotspot *createHotspot(SensorManager *sensorManager, ESPConfig &config);
 WiFiModule *createWiFiModule(ESPConfig &config);
 EasyServer *createServer(ESPConfig &config);
 EasyMQTT *createMQTTPubSub(ESPConfig &config);
@@ -31,9 +25,7 @@ void createManager(
     EasyServer *server,
     EasyMQTT *mqttClient,
     SensorManager *sensorManager,
-    FireDetector *fireDetector,
-    TemperatureRegulator *regulator,
-    AmIHotspot *hotspot,
+    Hotspot *hotspot,
     ActuatorManager *actuatorManager,
     WiFiModule *wifiModule);
 
@@ -57,11 +49,7 @@ void setup()
 
     ActuatorManager *actuatorManager = createControlModule(config);
     SensorManager *sensorManager = createSensorModule(config);
-    FireDetector *fireDetector =
-        createFireDetectorModule(sensorManager, config);
-    TemperatureRegulator *regulator =
-        createRegulationModule(actuatorManager, config);
-    AmIHotspot *hotspot = createHotspot(sensorManager, config);
+    Hotspot *hotspot = createHotspot(sensorManager, config);
     EasyServer *server = createServer(config);
     EasyMQTT *mqttClient = createMQTTPubSub(config);
 
@@ -69,8 +57,6 @@ void setup()
         server,
         mqttClient,
         sensorManager,
-        fireDetector,
-        regulator,
         hotspot,
         actuatorManager,
         wifiModule);
@@ -107,19 +93,11 @@ ESPConfig &getConfig()
 
 ActuatorManager *createControlModule(ESPConfig &config)
 {
-    FanController *fanController =
-        new FanController(config.FAN_PIN, config.FAN_PWM_CHANNEL);
-    LedController *acLedController = new LedController(config.AC_LED_PIN);
-    LedController *heaterLedController =
-        new LedController(config.HEATER_LED_PIN);
     OnboardLedController *onboardLedController = new OnboardLedController();
     LedStripController *ledStripController =
         new LedStripController(config.LED_STRIP_PIN, config.LED_STRIP_SIZE);
 
     return new ActuatorManager(
-        *fanController,
-        *acLedController,
-        *heaterLedController,
         *onboardLedController,
         *ledStripController);
 }
@@ -133,27 +111,9 @@ SensorManager *createSensorModule(ESPConfig &config)
         *tempSensor, *lightSensor, config.DETECTION_BUFFER_SIZE);
 }
 
-FireDetector *createFireDetectorModule(
-    SensorManager *sensorManager,
-    ESPConfig &config)
+Hotspot *createHotspot(SensorManager *sensorManager, ESPConfig &config)
 {
-    return new FireDetector(
-        *sensorManager,
-        config.FIRE_TEMPERATURE_THRESHOLD,
-        config.FIRE_LIGHT_THRESHOLD);
-}
-
-TemperatureRegulator *createRegulationModule(
-    ActuatorManager *actuatorManager,
-    ESPConfig &config)
-{
-    return new TemperatureRegulator(
-        *actuatorManager, config.LOW_TEMP, config.HIGH_TEMP);
-}
-
-AmIHotspot *createHotspot(SensorManager *sensorManager, ESPConfig &config)
-{
-    return new AmIHotspot(*sensorManager, config.LATITUDE, config.LONGITUDE);
+    return new Hotspot(*sensorManager, config.LATITUDE, config.LONGITUDE);
 }
 
 WiFiModule *createWiFiModule(ESPConfig &config)
@@ -175,9 +135,7 @@ void createManager(
     EasyServer *server,
     EasyMQTT *mqttClient,
     SensorManager *sensorManager,
-    FireDetector *fireDetector,
-    TemperatureRegulator *regulator,
-    AmIHotspot *hotspot,
+    Hotspot *hotspot,
     ActuatorManager *actuatorManager,
     WiFiModule *wifiModule)
 {
@@ -185,8 +143,6 @@ void createManager(
         *server,
         *mqttClient,
         *sensorManager,
-        *fireDetector,
-        *regulator,
         *hotspot,
         *actuatorManager,
         *wifiModule);

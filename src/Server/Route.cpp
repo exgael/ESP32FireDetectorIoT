@@ -5,8 +5,7 @@ void setupRouteHandlers(
     EasyServer &server,
     ActuatorManager &actuatorManager,
     SensorManager &sensorManager,
-    TemperatureRegulator &regulator,
-    FireDetector &fireDetector,
+    Hotspot &hotspot,
     WiFiModule &wifiModule,
     Logger &logger) noexcept
 {
@@ -21,8 +20,7 @@ void setupRouteHandlers(
         rootControllerHandler(
             actuatorManager,
             sensorManager,
-            regulator,
-            fireDetector,
+            hotspot,
             wifiModule));
 
     server.get(
@@ -30,7 +28,7 @@ void setupRouteHandlers(
         { // Middlewares
           fetchRequestValidationHandler() },
         // Handler
-        getValuesControllerHandler(sensorManager, regulator, fireDetector));
+        getValuesControllerHandler(sensorManager, hotspot));
 
     server.get(
         "/set",
@@ -38,7 +36,7 @@ void setupRouteHandlers(
           setRequestValidationHandler() },
         // Handler
         setValuesControllerHandler(
-            actuatorManager, sensorManager, regulator, fireDetector));
+            actuatorManager, sensorManager));
 
     server.onNotFound([&logger](Request &req, Response &res) {
         logger.warn("http request gave 404.");

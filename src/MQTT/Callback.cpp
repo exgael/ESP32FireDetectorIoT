@@ -1,12 +1,12 @@
 #include "MQTT/Callback.h"
 
-extern void setupCallback(EasyMQTT &client, AmIHotspot &hotspot, Logger &logger)
+extern void setupCallback(EasyMQTT &client, Hotspot &hotspot, Logger &logger)
 {
     client.setBufferSize(512);
     client.setMessageHandler(mqttCallback(hotspot, logger));
 }
 
-extern MessageHandler mqttCallback(AmIHotspot &hotspot, Logger &logger) noexcept
+extern MessageHandler mqttCallback(Hotspot &hotspot, Logger &logger) noexcept
 {
     // Callback when a message is published on a subscribed topic.
     return [&](char *topic, byte *payload, unsigned int length) {

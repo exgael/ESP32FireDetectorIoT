@@ -1,6 +1,6 @@
-#include "HotSpot.h"
+#include "Hotspot.h"
 
-AmIHotspot::AmIHotspot(SensorManager &sensorManager, double lat, double lon)
+Hotspot::Hotspot(SensorManager &sensorManager, double lat, double lon)
     : sensorManager(sensorManager), location(lat, lon)
 {
 }
@@ -21,7 +21,7 @@ String ESPPoolStatus::toString() const
         " Hotspot" + this->hotspot;
 }
 
-String AmIHotspot::toString() const
+String Hotspot::toString() const
 {
     String newline = "\n";
 
@@ -46,7 +46,7 @@ ESPPoolStatus::ESPPoolStatus(
 {
 }
 
-int AmIHotspot::add(ESPPoolStatus &&other)
+int Hotspot::add(ESPPoolStatus &&other)
 {
     if (other.location.distance(this->location) <= 10) {
         // Self is hotspot
@@ -65,7 +65,7 @@ int AmIHotspot::add(ESPPoolStatus &&other)
     return 1;
 }
 
-bool AmIHotspot::isHotSpot(double radius) const
+bool Hotspot::isHotspot() const
 {
     return this->lastNearHotspot == nullptr;
 }

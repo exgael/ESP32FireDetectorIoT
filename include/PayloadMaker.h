@@ -2,10 +2,8 @@
 
 // https://arduinojson.org/v7/api/jsondocument/
 #include "ESPConfig.h"
-#include "FireDetector.h"
-#include "HotSpot.h"
+#include "Hotspot.h"
 #include "SensorManager.h"
-#include "TemperatureRegulator.h"
 #include "WiFiModule.h"
 
 #include <ArduinoJson.h>
@@ -18,7 +16,7 @@ class PayloadMaker {
      */
     static String getPiscineStateString(
         const SensorManager &sensorData,
-        const AmIHotspot &hotspot);
+        const Hotspot &hotspot);
 
    private:
     static String getStringFromJson(JsonDocument &doc);

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "ESPConfig.h"
-#include "FireDetector.h"
+#include "ActuatorManager.h"
 #include "SensorManager.h"
-#include "TemperatureRegulator.h"
+#include "Hotspot.h"
 #include "WiFiModule.h"
 
 #include <Easylife.h>
@@ -19,8 +19,7 @@
 extern Handler rootControllerHandler(
     ActuatorManager &actuatorManager,
     SensorManager &sensorManager,
-    TemperatureRegulator &regulator,
-    FireDetector &fireDetector,
+    Hotspot &hotspot,
     WiFiModule &wifiModule) noexcept;
 
 /////////////////////////////
@@ -32,8 +31,7 @@ extern Handler rootControllerHandler(
  */
 extern Handler getValuesControllerHandler(
     SensorManager &sensorManager,
-    TemperatureRegulator &regulator,
-    FireDetector &fireDetector) noexcept;
+    Hotspot &hotspot) noexcept;
 
 /////////////////////////////
 //           SET           //
@@ -44,6 +42,4 @@ extern Handler getValuesControllerHandler(
  */
 extern Handler setValuesControllerHandler(
     ActuatorManager &actuatorManager,
-    SensorManager &sensorManager,
-    TemperatureRegulator &regulator,
-    FireDetector &fireDetector);
+    SensorManager &sensorManager);

@@ -7,33 +7,25 @@
 Handler rootControllerHandler(
     ActuatorManager &actuatorManager,
     SensorManager &sensorManager,
-    TemperatureRegulator &regulator,
-    FireDetector &fireDetector,
+    Hotspot &hotspot,
     WiFiModule &wifiModule) noexcept
 {
     return [&](Request &req, Response &res) {
         std::map<String, std::function<String()>> placeholderMap = {
             { "TEMPERATURE",
-              [&]() { return String(sensorManager.getTemperature()); } },
+                [&]() { return String(sensorManager.getTemperature()); } },
             { "LIGHT",
-              [&]() { return String(sensorManager.getLuminosity()); } },
+                [&]() { return String(sensorManager.getLuminosity()); } },
             { "UPTIME",
-              [&]() { return String(millis() / 1000); } }, // Uptime in seconds
-            { "RUNNING", [&]() { return regulator.describeState(); } },
-            { "FIRE",
-              [&]() { return fireDetector.isFireDetected() ? "Yes" : "No"; } },
-            { "SSID", [&]() { return wifiModule.getSSID(); } },
-            { "MAC", [&]() { return wifiModule.getMAC(); } },
-            { "IP", [&]() { return wifiModule.getIP(); } },
-            { "COOLER",
-              [&]() { return regulator.isCooling() ? "ON" : "OFF"; } },
-            { "HEATER",
-              [&]() { return regulator.isHeating() ? "ON" : "OFF"; } },
-            { "FTT",
-              [&]() { return String(fireDetector.getTempThreshold()); } },
-            { "FLT", [&]() { return String(fireDetector.getLumThreshold()); } },
-            { "LT", [&]() { return String(regulator.getLowThreshold()); } },
-            { "HT", [&]() { return String(regulator.getHighThreshold()); } }
+                [&]() { return String(millis() / 1000); } }, // Uptime in seconds
+            { "SSID", 
+                [&]() { return wifiModule.getSSID(); } },
+            { "MAC", 
+                [&]() { return wifiModule.getMAC(); } },
+            { "IP", 
+                [&]() { return wifiModule.getIP(); } },
+            { "IS_HOTSPOT", 
+                [&]() { return String(hotspot.isHotspot());} }
         };
 
         /**
@@ -62,8 +54,7 @@ Handler rootControllerHandler(
 
 Handler getValuesControllerHandler(
     SensorManager &sensorManager,
-    TemperatureRegulator &regulator,
-    FireDetector &fireDetector) noexcept
+    Hotspot &hotspot) noexcept
 {
     return [&](Request &req, Response &res) {
         JsonDocument json;
@@ -84,36 +75,12 @@ Handler getValuesControllerHandler(
               [&](JsonDocument &json) {
                   json["light"] = sensorManager.getLuminosity();
               } },
-            { "running",
+            { "is_hotspot",
               [&](JsonDocument &json) {
-                  json["running"] = regulator.describeState();
-              } },
-            { "fire",
-              [&](JsonDocument &json) {
-                  json["fire"] = fireDetector.isFireDetected() ? "Yes" : "No";
+                  json["is_hotspot"] = hotspot.isHotspot();
               } },
             { "uptime",
               [&](JsonDocument &json) { json["uptime"] = millis() / 1000; } },
-            { "cooler",
-              [&](JsonDocument &json) {
-                  json["cooler"] = regulator.isCooling() ? "ON" : "OFF";
-              } },
-            { "FTT",
-              [&](JsonDocument &json) {
-                  json["FTT"] = fireDetector.getTempThreshold();
-              } },
-            { "FLT",
-              [&](JsonDocument &json) {
-                  json["FLT"] = fireDetector.getLumThreshold();
-              } },
-            { "LT",
-              [&](JsonDocument &json) {
-                  json["LT"] = regulator.getLowThreshold();
-              } },
-            { "HT",
-              [&](JsonDocument &json) {
-                  json["HT"] = regulator.getHighThreshold();
-              } },
         };
 
         /**
@@ -151,9 +118,7 @@ Handler getValuesControllerHandler(
 
 Handler setValuesControllerHandler(
     ActuatorManager &actuatorManager,
-    SensorManager &sensorManager,
-    TemperatureRegulator &regulator,
-    FireDetector &fireDetector)
+    SensorManager &sensorManager)
 {
     return [&](Request &req, Response &res) {
         // Process parameter by name
@@ -161,34 +126,30 @@ Handler setValuesControllerHandler(
             String paramValue = req.getQueryParamValue(paramName);
 
             // Process "cool" parameter
-            if (paramName == "cool") {
+            if (paramName == "onboardLed") {
                 if (paramValue == "on") {
-                    actuatorManager.requestCoolerOn();
+                    actuatorManager.requestOnboardLedOn();
                 } else if (paramValue == "off") {
-                    actuatorManager.requestCoolerOff();
+                    actuatorManager.requestOnboardLedOff();
                 }
             }
             // Process "heat" parameter
-            else if (paramName == "heat") {
+            else if (paramName == "ledStrip") {
                 if (paramValue == "on") {
-                    actuatorManager.requestHeaterOn();
+                    actuatorManager.requestLedStripOn();
                 } else if (paramValue == "off") {
-                    actuatorManager.requestHeaterOff();
+                    actuatorManager.requestLedStripOff();
                 }
             }
             // Process threshold parameters
-            else if (paramName == "lt") {
-                int newLowThreshold = paramValue.toInt();
-                regulator.setLowThreshold(newLowThreshold);
-            } else if (paramName == "ht") {
-                int newHighThreshold = paramValue.toInt();
-                regulator.setHighThreshold(newHighThreshold);
-            } else if (paramName == "FTT") {
-                int newFireTempThreshold = paramValue.toInt();
-                fireDetector.updateTemperatureThreshold(newFireTempThreshold);
-            } else if (paramName == "FLT") {
-                int newFireLightThreshold = paramValue.toInt();
-                fireDetector.updateLuminosityThreshold(newFireLightThreshold);
+            else if (paramName == "ledStripColor") {
+                if (paramValue == "red") {
+                    actuatorManager.requestLedStripRed();
+                } else if (paramValue == "green") {
+                    actuatorManager.requestLedStripGreen();
+                } else if (paramValue == "orange") {
+                    actuatorManager.requestLedStripOrange();
+                }
             }
         }
 

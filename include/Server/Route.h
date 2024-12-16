@@ -10,7 +10,6 @@ void setupRouteHandlers(
     EasyServer &server,
     ActuatorManager &actuatorManager,
     SensorManager &sensorManager,
-    TemperatureRegulator &regulator,
-    FireDetector &fireDetector,
+    Hotspot &hotspot,
     WiFiModule &wifiModule,
     Logger &logger) noexcept;

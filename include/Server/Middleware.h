@@ -9,7 +9,6 @@ MiddlewareFunction errorHandler(Logger &logger);
 MiddlewareFunction rootRequestValidationHandler();
 MiddlewareFunction fetchRequestValidationHandler();
 MiddlewareFunction setRequestValidationHandler();
-MiddlewareFunction reportRequestValidationHandler();
 
 // Helper function
 bool checkValidQueryParams(
@@ -18,5 +17,3 @@ bool checkValidQueryParams(
 bool checkRequiredBodyParams(
     const Request &req,
     const std::vector<String> &requiredParams);
-bool isPositiveOrZeroInteger(const String &value);
-bool isIntegerParam(const String &param);

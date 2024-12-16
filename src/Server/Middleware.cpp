@@ -62,8 +62,7 @@ MiddlewareFunction fetchRequestValidationHandler()
 {
     return [](Request &req, Response &res, NextFunction next) {
         std::vector<String> validQueryParams = {
-            "temperature", "light", "running", "fire", "uptime",
-            "cooler",      "FTT",   "FLT",     "LT",   "HT"
+            "temperature", "light", "is_hotspot", "uptime"
         };
 
         // Check if any unexpected parameters are present
@@ -76,8 +75,7 @@ MiddlewareFunction fetchRequestValidationHandler()
         if (!checkValidQueryParams(req, validQueryParams)) {
             res.error(
                 400,
-                "Invalid query parameter name. Expected: cool, heat, "
-                "lt, ht, FTT, FLT.");
+                "Invalid query parameter name. Expected: temperature, light, is_hotspot, uptime.");
             return;
         }
 
@@ -91,15 +89,13 @@ MiddlewareFunction fetchRequestValidationHandler()
 MiddlewareFunction setRequestValidationHandler()
 {
     return [](Request &req, Response &res, NextFunction next) {
-        std::vector<String> validQueryParams = { "cool", "heat", "lt",
-                                                 "ht",   "FTT",  "FLT" };
+        std::vector<String> validQueryParams = { "onboardLed", "ledStrip", "ledStripColor" };
 
         // Validate query parameter names
         if (!checkValidQueryParams(req, validQueryParams)) {
             res.error(
                 400,
-                "Invalid query parameter name. Expected: cool, heat, "
-                "lt, ht, FTT, FLT.");
+                "Invalid query parameter name. Expected: onboardLed, ledStrip");
             return;
         }
 
@@ -108,7 +104,7 @@ MiddlewareFunction setRequestValidationHandler()
             String value = req.getQueryParamValue(param);
 
             // Check for "on" or "off" values
-            if ((param == "cool" || param == "heat") &&
+            if ((param == "onboardLed" || param == "ledStrip") &&
                 !(value == "on" || value == "off")) {
                 res.error(
                     400,
@@ -118,47 +114,12 @@ MiddlewareFunction setRequestValidationHandler()
             }
 
             // Check for positive integer values
-            if (isIntegerParam(param) && !isPositiveOrZeroInteger(value)) {
+            if ((param == "ledStripColor") &&
+                !(value == "red" || value == "green" || value == "orange")) {
                 res.error(
                     400,
                     "Invalid value for '" + param +
-                        "'. Expected a positive integer.");
-                return;
-            }
-        }
-
-        // Pass control to the next handler
-        next();
-    };
-}
-
-/** SET REPORT */
-
-MiddlewareFunction reportRequestValidationHandler()
-{
-    return [](Request &req, Response &res, NextFunction next) {
-        std::vector<String> requiredBodyParams = { "ip", "port", "sp" };
-
-        // Validate query parameter names
-        if (!checkRequiredBodyParams(req, requiredBodyParams)) {
-            res.error(
-                400,
-                "Invalid query parameter name. Expected: ip, port and sp.");
-            return;
-        }
-
-        // Validate parameter values
-        for (const String &param : requiredBodyParams) {
-            String value = req.getBodyParamValue(param);
-
-            // MARK: TODO - Check IP regex
-
-            // Check for positive integer values
-            if (isIntegerParam(param) && !isPositiveOrZeroInteger(value)) {
-                res.error(
-                    400,
-                    "Invalid value for '" + param +
-                        "'. Expected a positive integer.");
+                        "'. Expected 'red', 'green' or 'orange'.");
                 return;
             }
         }
@@ -207,17 +168,4 @@ bool checkValidQueryParams(
         }
     }
     return true;
-}
-
-bool isPositiveOrZeroInteger(const String &value)
-{
-    int intValue = value.toInt();
-    return (intValue >= 0);
-}
-
-bool isIntegerParam(const String &param)
-{
-    return (
-        param == "lt" || param == "ht" || param == "FTT" || param == "FLT" ||
-        param == "port" || param == "sp");
 }

@@ -2,7 +2,7 @@
 
 String PayloadMaker::getPiscineStateString(
     const SensorManager &sensorData,
-    const AmIHotspot &hotspot)
+    const Hotspot &hotspot)
 {
     JsonDocument json;
     json.clear();
@@ -29,7 +29,7 @@ String PayloadMaker::getPiscineStateString(
 
     // Piscine object
     JsonObject piscine = json["piscine"].to<JsonObject>();
-    piscine["hotspot"] = hotspot.isHotSpot(config.HOTSPOT_DETECTION_RADIUS);
+    piscine["hotspot"] = hotspot.isHotspot();
     piscine["occuped"] =
         sensorData.getLuminosity() < config.OCCUPATION_THRESHOLD ? true : false;
 

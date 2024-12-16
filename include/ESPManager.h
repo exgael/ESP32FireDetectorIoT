@@ -7,11 +7,10 @@
 #define USE_SERIAL Serial
 
 #include "ESPConfig.h"
-#include "FireDetector.h"
-#include "HotSpot.h"
+#include "Hotspot.h"
+#include "ActuatorManager.h"
 #include "PayloadMaker.h"
 #include "SensorManager.h"
-#include "TemperatureRegulator.h"
 #include "WiFiModule.h"
 
 #include <Arduino.h>
@@ -26,9 +25,7 @@ class ESPManager {
         EasyServer &server,
         EasyMQTT &mqttClient,
         SensorManager &sensorManager,
-        FireDetector &fireDetector,
-        TemperatureRegulator &regulator,
-        AmIHotspot &hotspot,
+        Hotspot &hotspot,
         ActuatorManager &actuatorManager,
         WiFiModule &wifiModule);
 
@@ -39,9 +36,7 @@ class ESPManager {
     EasyServer &server;
     EasyMQTT &mqttClient;
     SensorManager &sensorManager;
-    FireDetector &fireDetector;
-    TemperatureRegulator &regulator;
-    AmIHotspot &hotspot;
+    Hotspot &hotspot;
     ActuatorManager &actuatorManager;
     WiFiModule &wifiModule;
 

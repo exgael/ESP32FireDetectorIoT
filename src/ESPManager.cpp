@@ -12,16 +12,12 @@ ESPManager::ESPManager(
     EasyServer &server,
     EasyMQTT &mqttClient,
     SensorManager &sensorManager,
-    FireDetector &fireDetector,
-    TemperatureRegulator &regulator,
-    AmIHotspot &hotspot,
+    Hotspot &hotspot,
     ActuatorManager &actuatorManager,
     WiFiModule &wifiModule)
     : server(server),
       mqttClient(mqttClient),
       sensorManager(sensorManager),
-      fireDetector(fireDetector),
-      regulator(regulator),
       hotspot(hotspot),
       actuatorManager(actuatorManager),
       wifiModule(wifiModule),
@@ -44,8 +40,7 @@ void ESPManager::init()
         server,
         actuatorManager,
         sensorManager,
-        regulator,
-        fireDetector,
+        hotspot,
         wifiModule,
         logger);
 
@@ -71,8 +66,6 @@ void ESPManager::executeWorkflow()
             logger.info("");
 
             sensorManager.updateReadings();
-            const bool isFireDetected = fireDetector.checkIfFireDetected();
-            regulator.regulate(sensorManager, isFireDetected);
             actuatorManager.processCommands();
 
             // Publish
@@ -89,7 +82,7 @@ void ESPManager::executeWorkflow()
         // Process incoming msg
         mqttClient.loop();
 
-        // Log HotSpot Status
+        // Log Hotspot Status
         if (iter % 5 == 0) {
             logger.debug(hotspot.toString().c_str());
         }

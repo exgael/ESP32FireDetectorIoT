@@ -6,49 +6,32 @@
 
 #include <EasyLife.h>
 
+#define ALL_LIGHT 100
+
 /**
- * @brief This class provide a central API to excute actuating commands.
+ * @brief This class provides a central API to execute actuating commands.
  */
 class ActuatorManager {
    public:
     ActuatorManager(
-        FanController fanController,
-        LedController coolerController,
-        LedController heaterController,
-        OnboardLedController fireAlarmController,
+        OnboardLedController onboardLedController,
         LedStripController ledStripController);
 
-    // Fan
-    void requestFanOn() noexcept;
-    void requestFanOff() noexcept;
-    void requestFanSpeed(float levle) noexcept;
-
-    // Cooler
-    void requestCoolerOn() noexcept;
-    void requestCoolerOff() noexcept;
-
-    // Heater
-    void requestHeaterOn() noexcept;
-    void requestHeaterOff() noexcept;
-
-    // On board
+    // Onboard LED Control
     void requestOnboardLedOn() noexcept;
     void requestOnboardLedOff() noexcept;
 
-    // Led strip
-    void requestLedStripGreen(size_t level) noexcept;
-    void requestLedStripOrange(size_t level) noexcept;
-    void requestLedStripRed(size_t level) noexcept;
+    // LED Strip Control
+    void requestLedStripGreen() noexcept;
+    void requestLedStripOrange() noexcept;
+    void requestLedStripRed() noexcept;
     void requestLedStripOff() noexcept;
     void requestLedStripOn() noexcept;
 
-    // init
+    // Initialization
     void init() noexcept;
 
-    //  Getter
-    [[nodiscard]] float getFanSpeed() const noexcept;
-
-    // Execute all cmds stored
+    // Execute all commands stored
     void processCommands() noexcept;
 
    private:
@@ -57,20 +40,11 @@ class ActuatorManager {
 
     // Actuators
     LedStripController ledStripController;
-    OnboardLedController fireAlarmController;
-    FanController fanController;
-    LedController coolerController;
-    LedController heaterController;
+    OnboardLedController onboardLedController;
 
     // Actuator Flags
-    bool isFanOn = false;
-
-    bool isCoolerOn = false;
-    bool isHeaterOn = false;
     bool isOnboardLedOn = false;
-
     bool isLedStripOn = false;
-    size_t ledStripLevel = 0;
     String ledStripcolor = "";
 
     /**
